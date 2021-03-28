@@ -1,12 +1,46 @@
 const mongoose = require('mongoose')
 
 const userSchema = mongoose.Schema({
-    name: String,
-    image: String,
-    countInStock: {
-        type: Number,
+    email: {
+        type: String,
         required: true
-    }
+    },
+    name: {
+        type: String,
+        required: true
+    },
+    passwordHash: {
+        type: String,
+        required: true
+    },
+    street: {
+        type: String,
+        default: ''
+    },
+    apartment: {
+        type: String,
+        default: ''
+    },
+    city: {
+        type: String,
+        default: ''
+    },
+    zip: {
+        type: String,
+        default: ''
+    },
+    country: {
+        type: String,
+        default: ''
+    },
+    phone: {
+        type: String,
+        default: ''
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
 })
 
 userSchema.virtual('id').get(function() {
@@ -18,3 +52,4 @@ userSchema.set('toJSON', {
 })
 
 exports.User = mongoose.model('User', userSchema)
+exports.userSchema = userSchema
