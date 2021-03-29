@@ -9,11 +9,7 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    richDescription: {
-        type: String,
-        default: ''
-    },
-    image: {
+    mainImage: {
         type: String,
         default: ''
     },
@@ -23,6 +19,14 @@ const productSchema = mongoose.Schema({
     brand: {
         type: String,
         default: ''
+    },
+    size: {
+        type: String,
+        require: true
+    },
+    color: {
+        type: String,
+        require: true,
     },
     price: {
         type: Number,
