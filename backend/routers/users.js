@@ -5,8 +5,9 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 router.get('/', async (req, res) => {
-    const userList = await User.find().select('-passwordHash')
+    if (!req.isAdmin) return res.status(403).send('Access denied')
 
+    const userList = await User.find().select('-passwordHash')
     if (!userList) {
         res.status(500).json({ success: false })
     }
@@ -14,6 +15,8 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
+    if (!req.isAdmin) return res.status(403).send('Access denied')
+
     const user = await User.findById(req.params.id).select('-passwordHash')
     if (!user) {
         return res.status(500).json({ message: 'The user with the given ID was not found.' })
@@ -23,40 +26,35 @@ router.get('/:id', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const user = await User.findOne({ email: req.body.email })
-    const secret = process.env.secret
-
     if (!user) {
         return res.status(400).send('The user not found!')
     }
-
     if (user && bcrypt.compareSync(req.body.password, user.passwordHash)) {
         const token = jwt.sign(
             {
                 userId: user.id,
-                isAdmin: user.isAdmin
+                isAdmin: user.isAdmin,
             },
-            secret,
+            process.env.secret,
             { expiresIn: '1d' }
         )
-        res.status(200).send({ user: user.email, token: token })
+        const userWihoutHash = Object.assign({}, user._doc)
+        delete userWihoutHash.passwordHash
+        return res.status(200).send({ user: userWihoutHash, token })
     } else {
-        return res.status(400).send('password is wrong')
+        return res.status(400).send('Password is wrong')
     }
-
 })
 
-router.post('/', async (req, res) => {
+router.post('/register', async (req, res) => {
+    if (!req.body.email) return res.status(400).send('Email is required')
+    if (!req.body.name) return res.status(400).send('Name is required')
+    if (!req.body.password) return res.status(400).send('Password is required')
+
     let user = new User({
-        name: req.body.name,
         email: req.body.email,
-        passwordHash: bcrypt.hashSync(req.body.password, 5),
-        street: req.body.street,
-        apartment: req.body.apartment,
-        city: req.body.city,
-        zip: req.body.zip,
-        country: req.body.country,
-        phone: req.body.phone,
-        isAdmin: req.body.isAdmin,
+        name: req.body.name,
+        passwordHash: bcrypt.hashSync(req.body.password, 10),
     })
     user = await user.save()
 
@@ -67,6 +65,9 @@ router.post('/', async (req, res) => {
 })
 
 router.get('/get/count', async (req, res) => {
+    console.log('req.status', req.isAdmin);
+    if (!req.isAdmin) return res.status(403).send('Access denied')
+
     const userCount = await User.countDocuments(count => count)
     if (!userCount) {
         return res.status(500).json({ success: false })
@@ -75,6 +76,8 @@ router.get('/get/count', async (req, res) => {
 })
 
 router.delete('/:id', async (req, res) => {
+    if (!req.isAdmin) return res.status(403).send('Access denied')
+
     User.findByIdAndRemove(req.params.id)
         .then(user => {
             if (user) {
@@ -95,6 +98,25 @@ router.delete('/:id', async (req, res) => {
                 error: err
             })
         })
+})
+
+
+// development
+
+router.post('/favourite', async (req, res) => {
+    res.status(501).send('Under development')
+})
+
+router.delete('/favourite', async (req, res) => {
+    res.status(501).send('Under development')
+})
+
+router.post('/cart', async (req, res) => {
+    res.status(501).send('Under development')
+})
+
+router.delete('/cart', async (req, res) => {
+    res.status(501).send('Under development')
 })
 
 module.exports = router

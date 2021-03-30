@@ -17,10 +17,6 @@ const userSchema = mongoose.Schema({
         type: String,
         default: ''
     },
-    apartment: {
-        type: String,
-        default: ''
-    },
     city: {
         type: String,
         default: ''
@@ -37,6 +33,16 @@ const userSchema = mongoose.Schema({
         type: String,
         default: ''
     },
+    cart: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'OrderItem',
+        default: []
+    }],
+    favourite: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+        default: []
+    }],
     isAdmin: {
         type: Boolean,
         default: false

@@ -19,20 +19,20 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    let category = new Category({
-        name: req.body.name,
-        icon: req.body.icon,
-        color: req.body.color
-    })
+    if (!req.isAdmin) return res.status(403).send('Access denied')
+
+    let category = new Category({ name: req.body.name })
     category = await category.save()
 
     if (!category) {
-        return res.status(404).send('the category cannot be created!')
+        return res.status(404).send('The category cannot be created!')
     }
     res.send(category)
 })
 
 router.put('/:id', async (req, res) => {
+    if (!req.isAdmin) return res.status(403).send('Access denied')
+
     const category = await Category.findByIdAndUpdate(
         req.params.id,
         {
@@ -50,6 +50,8 @@ router.put('/:id', async (req, res) => {
 })
 
 router.delete('/:categoryId', async (req, res) => {
+    if (!req.isAdmin) return res.status(403).send('Access denied')
+
     Category.findByIdAndRemove(req.params.categoryId)
         .then(category => {
             if (category) {
