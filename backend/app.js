@@ -19,7 +19,8 @@ const productsRouter = require('./routers/products')
 const usersRoutes = require('./routers/users')
 const ordersRoutes = require('./routers/orders')
 const categoriesRoutes = require('./routers/categories')
-const favouriteRoutes = require('./routers//favourite')
+const favouriteRoutes = require('./routers/favourite')
+const cartRoutes = require('./routers/cart')
 
 // Middleware
 app.use(bodyParser.json())
@@ -36,6 +37,7 @@ app.use(`${api}/users`, usersRoutes)
 app.use(`${api}/categories`, categoriesRoutes)
 app.use(`${api}/orders`, ordersRoutes)
 app.use(`${api}/favourite`, favouriteRoutes)
+app.use(`${api}/cart`, cartRoutes)
 
 
 // DB connect
