@@ -1,5 +1,6 @@
 @import "./fonts.scss";
 @import "./reset.scss";
+@import "./animations.scss";
 
 .container {
     display: block;
@@ -7,4 +8,21 @@
     width: 100%;
     margin: 0 auto;
     padding: 0 15px;
+}
+
+.btn-primary {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    transition: color .3s ease;
+
+    &:hover,
+    &:focus {
+        outline: none;
+        color: #00C0D1;
+    }
+
+    &:active {
+        color: #0078B4;
+    }
 }

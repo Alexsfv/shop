@@ -1,0 +1,74 @@
+.side-menu {
+    position: fixed;
+    width: 100%;
+    margin: 0 0 0 20px;
+    top: 0;
+    left: 0;
+    font-family: MontSerrat, sans-serif;
+    background-color: blue;
+    z-index: 500;
+
+    &__body {
+        position: absolute;
+        display: flex;
+        max-width: 420px;
+        width: 100%;
+        height: 100vh;
+        top: 0;
+        right: 0;
+        flex-direction: column;
+        background-color: #fff;
+        overflow: auto;
+    }
+
+    &__header {
+        display: flex;
+        width: 100%;
+        height: 55px;
+        padding: 0 20px;
+        align-items: center;
+        justify-content: space-between;
+        color: #fff;
+        background-color: #000;
+        overflow: auto;
+    }
+
+    &__header-text {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        user-select: none;
+    }
+
+    &__close-btn {
+        background-color: transparent;
+        color: #fff;
+    }
+
+    &__content {
+        flex-grow: 1;
+        padding: 20px;
+    }
+
+    &__footer {
+        width: 100%;
+        min-height: 30px;
+        background-color: #000;
+    }
+}
+
+.side-menu.enter {
+    .side-menu__body {
+        animation-name: from-top;
+        animation-duration: 300ms;
+        animation-fill-mode: forwards;
+    }
+}
+
+.side-menu.exit {
+    .side-menu__body {
+
+        animation-name: to-top;
+        animation-duration: 300ms;
+        animation-fill-mode: forwards;
+    }
+}

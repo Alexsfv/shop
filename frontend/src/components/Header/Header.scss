@@ -1,12 +1,12 @@
 .header {
     position: absolute;
-    display: flex;
     width: 100%;
     top: 0;
     left: 0;
     font-family: Montserrat;
     color: #fff;
     background-color: #000000;
+    z-index: 2;
 
     &__container {
         display: flex;
@@ -50,6 +50,8 @@
     }
 
     &__social-item {
+        display: flex;
+        align-items: center;
         margin: 0 0 0 10px;
     }
 

@@ -7,10 +7,9 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 
-
-const Header: React.FC<{}> = () => {
+const Header = React.forwardRef<HTMLElement, {}>((props, ref) => {
     return (
-        <header className="header">
+        <header className="header" ref={ref}>
             <div className="container header__container">
 
                 <div className="header__contacts">
@@ -49,6 +48,6 @@ const Header: React.FC<{}> = () => {
             </div>
         </header>
     )
-}
+})
 
 export default Header
