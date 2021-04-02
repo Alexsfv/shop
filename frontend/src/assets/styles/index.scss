@@ -2,6 +2,10 @@
 @import "./reset.scss";
 @import "./animations.scss";
 
+body.lock {
+    overflow: hidden;
+}
+
 .container {
     display: block;
     max-width: 1230px;
@@ -10,11 +14,28 @@
     padding: 0 15px;
 }
 
-.btn-primary {
+.btn {
     cursor: pointer;
     outline: none;
     border: none;
     transition: color .3s ease;
+}
+
+.btn-primary {
+    &:hover,
+    &:focus {
+        outline: none;
+        color: #00C0D1;
+    }
+
+    &:active {
+        color: #0078B4;
+    }
+}
+
+.btn-black {
+    background-color: #000;
+    color: #fff;
 
     &:hover,
     &:focus {
@@ -24,5 +45,17 @@
 
     &:active {
         color: #0078B4;
+    }
+}
+
+.btn-danger {
+    &:hover,
+    &:focus {
+        outline: none;
+        color: #ff0000;
+    }
+
+    &:active {
+        color: #b40000;
     }
 }

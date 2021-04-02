@@ -7,7 +7,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import LocalMallOutlinedIcon from '@material-ui/icons/LocalMallOutlined';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
-import SideMenu from '../../SideMenu/SideMenu';
+import SideMenu from '../../sideMenu/SideMenu/SideMenu';
+import { lockBody, unlockBody } from '../../../utils/styleUtils';
 
 type NavbarLayoutProps = {}
 
@@ -22,6 +23,11 @@ const NavbarLayout: React.FC<NavbarLayoutProps> = ({ children }) => {
 
     const handleMenu = () => {
         setShowModal(!showModal)
+        if (showModal) {
+            unlockBody()
+        } else {
+            lockBody()
+        }
     }
 
     useEffect(() => {
@@ -47,7 +53,7 @@ const NavbarLayout: React.FC<NavbarLayoutProps> = ({ children }) => {
                         {
                             fake.map(c => (
                                 <li key={Math.random()} className="navbar__category-item">
-                                    <Link to="/" className="navbar__category-link btn-primary">
+                                    <Link to="/" className="navbar__category-link btn btn-primary">
                                         {c}
                                     </Link>
                                 </li>
@@ -56,16 +62,16 @@ const NavbarLayout: React.FC<NavbarLayoutProps> = ({ children }) => {
                     </ul>
 
                     <div className="navbar__controls">
-                        <button className="navbar__control btn-primary" onClick={handleMenu}>
+                        <button className="navbar__control btn btn-primary" onClick={handleMenu}>
                             <SearchIcon />
                         </button>
-                        <button className="navbar__control btn-primary" onClick={handleMenu}>
+                        <button className="navbar__control btn btn-primary" onClick={handleMenu}>
                             <AccountCircleOutlinedIcon />
                         </button>
-                        <button className="navbar__control btn-primary" onClick={handleMenu}>
+                        <button className="navbar__control btn btn-primary" onClick={handleMenu}>
                             <LocalMallOutlinedIcon />
                         </button>
-                        <button className="navbar__control navbar__control_menu btn-primary" onClick={handleMenu}>
+                        <button className="navbar__control navbar__control_menu btn btn-primary" onClick={handleMenu}>
                             <MenuOpenIcon className="navbar__menu-icon" />
                         </button>
                     </div>

@@ -1,0 +1,76 @@
+.input-number {
+    width: 100%;
+    margin: 0;
+
+    &__label {
+        position: relative;
+        display: block;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    &__input {
+        width: 100%;
+        height: 30px;
+        padding: 4px 32px;
+        border: none;
+        outline: none;
+        text-align: center;
+        font-weight: 300;
+        background-color: rgb(235, 235, 235);
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+    }
+
+    &__minus,
+    &__plus {
+        display: flex;
+        position: absolute;
+        width: 28px;
+        top: 0;
+        bottom: 0;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 22px;
+        line-height: 50%;
+        user-select: none;
+        transition: all .3s ease;
+        background-color: rgb(226, 226, 226);
+        color: black;
+
+        &:focus {
+            background-color: rgb(206, 206, 206);
+        }
+    }
+
+    &__minus {
+        left: 0;
+
+    }
+
+    &__plus {
+        right: 0;
+    }
+
+    &__error {
+        margin: 3px 0 0;
+        max-width: 100%;
+        word-break: break-all;
+        color: red;
+        font-size: 14px;
+    }
+}
+
+.input-number.error {
+
+    .input-number__label {
+        border: 1px solid red;
+
+    }
+}

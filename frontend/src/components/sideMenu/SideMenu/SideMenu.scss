@@ -1,3 +1,6 @@
+$header-height: 55px;
+$footer-height: 48px;
+
 .side-menu {
     position: fixed;
     width: 100%;
@@ -15,7 +18,7 @@
         width: 100%;
         height: 100vh;
         top: 0;
-        right: 0;
+        right: 20px;
         flex-direction: column;
         background-color: #fff;
         overflow: auto;
@@ -24,10 +27,11 @@
     &__header {
         display: flex;
         width: 100%;
-        height: 55px;
+        height: $header-height;
         padding: 0 20px;
         align-items: center;
         justify-content: space-between;
+        flex-shrink: 0;
         color: #fff;
         background-color: #000;
         overflow: auto;
@@ -45,14 +49,32 @@
     }
 
     &__content {
+        max-width: 100%;
         flex-grow: 1;
-        padding: 20px;
+        padding: 14px 25px 25px 25px;
+        // background-color: red;
     }
 
     &__footer {
         width: 100%;
-        min-height: 30px;
-        background-color: #000;
+        min-height: $footer-height;
+        bottom: 0;
+        flex-shrink: 0;
+        background-color: #fff;
+    }
+
+    .MuiButtonBase-root {
+        min-width: auto;
+        max-width: 25%;
+        color: rgb(66, 66, 66);
+    }
+
+    .Mui-selected {
+        color: #0078B4;
+    }
+
+    .MuiTabs-indicator {
+        background-color: #0078B4;
     }
 }
 
