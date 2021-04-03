@@ -1,0 +1,60 @@
+.btn {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    transition: all .3s ease;
+}
+
+.btn-primary {
+    &:hover,
+    &:focus {
+        outline: none;
+        color: #00C0D1;
+    }
+
+    &:active {
+        color: #0078B4;
+    }
+}
+
+.btn-black {
+    background-color: #000;
+    color: #fff;
+
+    &:hover,
+    &:focus {
+        outline: none;
+        color: #00C0D1;
+    }
+
+    &:active {
+        color: #0078B4;
+    }
+}
+
+.btn-grey {
+    background-color: #E6E8EB;
+    color: #000;
+
+    &:hover,
+    &:focus {
+        outline: none;
+        background-color: #CFD3D9;
+    }
+
+    &:active {
+        background-color: #A3AAB4;
+    }
+}
+
+.btn-danger {
+    &:hover,
+    &:focus {
+        outline: none;
+        color: #ff0000;
+    }
+
+    &:active {
+        color: #b40000;
+    }
+}

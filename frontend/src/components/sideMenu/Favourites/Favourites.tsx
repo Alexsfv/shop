@@ -37,7 +37,6 @@ const Favourites: React.FC<FavouritesProps> = (props) => {
                                     onDelete={() => handleDelete(index + '')}
                                     onAddCart={() => handleAddCart(index + '')}
                                     totalPrice={512}
-                                    borderBottom={true}
                                 />
                             ))
                         }

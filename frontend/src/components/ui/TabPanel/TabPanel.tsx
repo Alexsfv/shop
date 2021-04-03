@@ -4,11 +4,11 @@ interface TabPanelProps {
     children?: React.ReactNode
     index: number
     value: number
-    dir: string
+    dir?: string
 }
 
 function TabPanel(props: TabPanelProps) {
-    const { children, value, index, ...other } = props;
+    const { children, value, index, dir = '', ...other } = props;
 
     return (
         <div
@@ -16,6 +16,7 @@ function TabPanel(props: TabPanelProps) {
             hidden={value !== index}
             id={`full-width-tabpanel-${index}`}
             aria-labelledby={`full-width-tab-${index}`}
+            dir={dir}
             {...other}
         >
             {value === index && (

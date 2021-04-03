@@ -13,7 +13,11 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 import Cart from '../Cart/Cart';
 import Favourites from '../Favourites/Favourites';
-import TabPanel from '../../ui/TabPanel/TabPanel';
+import Search from '../Search/Search';
+import AuthorizeUser from '../AuthorizeUser/AuthorizeUser';
+import Account from '../Account/Account';
+import FlightIcon from '@material-ui/icons/Flight';
+import Orders from '../Orders/Orders';
 
 type SideMenuProps = {
     isShow: boolean
@@ -22,22 +26,20 @@ type SideMenuProps = {
     onClose: () => void
 }
 
-const headers = ['search', 'favourite', 'shopping cart', 'user']
+const headers = ['search', 'favourite', 'shopping cart', 'account', 'orders']
 
 const SideMenu: React.FC<SideMenuProps> = (props) => {
-    const {
-        isShow, onClose,
-    } = props
+    const { isShow, onClose } = props
 
     const [value, setValue] = useState<number>(0)
+    const [isAuth, setAuth] = useState<boolean>(true)
 
-    const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    const handleChange = (e: React.ChangeEvent<{}>, newValue: number) => {
         setValue(newValue);
-    };
-
+    }
     const handleChangeIndex = (index: number) => {
         setValue(index);
-    };
+    }
 
     return (
         <>
@@ -70,16 +72,21 @@ const SideMenu: React.FC<SideMenuProps> = (props) => {
                         <div className="side-menu__content">
                             <SwipeableViews
                                 axis={'x'}
-                                // axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                                 index={value}
                                 onChangeIndex={handleChangeIndex}
                             >
-                                <TabPanel value={value} index={0} dir="rtl">
-                                    Item Two
-                                </TabPanel>
-                                
+                                <Search value={value} index={0}/>
                                 <Favourites value={value} index={1}/>
                                 <Cart value={value} index={2}/>
+                                {
+                                    isAuth
+                                        ? <Account value={value} index={3}/>
+                                        : <AuthorizeUser value={value} index={3}/>
+                                }
+                                {
+                                    isAuth &&
+                                    <Orders value={value} index={4}/>
+                                }
                             </SwipeableViews>
                         </div>
 
@@ -90,10 +97,11 @@ const SideMenu: React.FC<SideMenuProps> = (props) => {
                                 variant="fullWidth"
                                 aria-label="icon tabs example"
                             >
-                                <Tab icon={<SearchIcon />} aria-label="search" />
-                                <Tab icon={<FavoriteIcon />} aria-label="favorite" />
-                                <Tab icon={<ShoppingBasketIcon />} aria-label="cart" />
-                                <Tab icon={<PersonPinIcon />} aria-label="person" />
+                                <Tab icon={<SearchIcon />} aria-label="search"/>
+                                <Tab icon={<FavoriteIcon />} aria-label="favorite"/>
+                                <Tab icon={<ShoppingBasketIcon />} aria-label="cart"/>
+                                <Tab icon={<PersonPinIcon />} aria-label="person"/>
+                                {isAuth && <Tab icon={<FlightIcon />} aria-label="orders"/>}
                             </Tabs>
                         </div>
 

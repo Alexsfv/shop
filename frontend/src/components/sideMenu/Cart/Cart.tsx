@@ -40,6 +40,7 @@ const Cart: React.FC<CartProps> = (props) => {
                                 onDelete={() => handleDelete(index + '')}
                                 totalPrice={512}
                                 borderBottom={true}
+                                showSummary={true}
                             />
                         ))
                     }

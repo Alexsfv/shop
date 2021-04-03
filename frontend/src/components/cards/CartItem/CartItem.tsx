@@ -13,16 +13,19 @@ type CartItemProps = {
     onAddCart?: () => void
     totalPrice?: string | number
     countValue?: number
+    disabled?: boolean
     min?: number
     max?: number
     borderBottom?: boolean
+    showSummary?: boolean
 }
 
 const CartItem: React.FC<CartItemProps> = (props) => {
     const {
         imgSrc, totalPrice, countValue,
         min, max, name, description,
-        borderBottom = false,
+        borderBottom = false, disabled,
+        showSummary,
         onChangeCount, onDelete, onAddCart
     } = props
 
@@ -40,7 +43,7 @@ const CartItem: React.FC<CartItemProps> = (props) => {
 
                 <div className="cart-item__footer">
                     {
-                        onChangeCount &&
+                        showSummary &&
                         <div className="cart-item__summary">
                             <InputNumber
                                 value={countValue}
@@ -49,6 +52,7 @@ const CartItem: React.FC<CartItemProps> = (props) => {
                                 classes={['cart-item__count']}
                                 min={min}
                                 max={max}
+                                disabled={disabled}
                             />
                             <p className="cart-item__price">$ {totalPrice}</p>
                         </div>

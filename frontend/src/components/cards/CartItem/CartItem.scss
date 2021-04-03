@@ -92,3 +92,15 @@
         color: rgb(63, 63, 63);
     }
 }
+
+@media all and (max-width: 576px) {
+    .cart-item {
+        &__count {
+            max-width: 100%;
+        }
+        &__price {
+            width: 100%;
+            margin-top: 10px;
+        }
+    }
+}

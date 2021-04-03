@@ -7,6 +7,7 @@ type InputNumberProps = {
     placeholder?: string
     classes?: string[]
     errorMessage?: string
+    disabled?: boolean
     min?: number
     max?: number
 }
@@ -15,6 +16,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
     const {
         value = -1, classes, errorMessage,
         placeholder, min, max,
+        disabled,
         onChange,
     } = props
 
@@ -52,6 +54,7 @@ const InputNumber: React.FC<InputNumberProps> = (props) => {
                     placeholder={placeholder}
                     min={min}
                     max={max}
+                    disabled={disabled}
                     onChange={e => handleChange(e.target.value)}
                 />
                 <button className="input-number__minus btn" onClick={handleMinus}>-</button>
