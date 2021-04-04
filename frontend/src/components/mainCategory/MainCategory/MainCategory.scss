@@ -1,0 +1,39 @@
+.main-category {
+    margin: 60px -13px 80px;
+
+    &__container {
+        padding: 0;
+    }
+
+    &__products {
+        display: flex;
+        margin: 40px 0 0;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    &__controls {
+        padding: 0 15px;
+    }
+
+    &__more-btn {
+        width: 100%;
+        padding: 15px 20px;
+        line-height: 1;
+        text-transform: uppercase;
+        font-family: Montserat, sans-serif;
+        font-weight: bold;
+        color: rgb(95, 95, 95);
+    }
+}
+
+@media all and (max-width: 1210px) {
+    .main-category {
+        &__products {
+            justify-content: space-around;
+        }
+        &__container {
+            padding: 0 15px;
+        }
+    }
+}
