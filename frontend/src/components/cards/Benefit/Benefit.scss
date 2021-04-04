@@ -1,0 +1,60 @@
+.benefit-item {
+    display: flex;
+    max-width: 320px;
+    margin: 0 10px 0 0;
+    font-weight: 600;
+    font-family: Montserat, sans-serif;
+    align-items: center;
+
+    &:last-child {
+        margin: 0;
+    }
+
+    &__icon {
+        font-size: 42px !important;
+        color: rgb(128, 128, 128);
+    }
+
+    &__text {
+        margin: 0 0 0 15px;
+    }
+
+    &__title {
+        margin: 0 0 4px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: rgb(49, 49, 49);
+    }
+
+    &__description {
+        margin: 0;
+        color: rgb(128, 128, 128);
+        font-size: 14px;
+    }
+}
+
+@media all and (max-width: 576px) {
+    .benefit-item {
+        max-width: 100%;
+        width: 100%;
+        margin: 0 0 15px;
+
+        &:nth-child(even) {
+            flex-direction: row-reverse;
+            .main-slide__benefit-text {
+                margin: 0 15px 0 0;
+            }
+        }
+    }
+}
+
+@media all and (max-width: 360px) {
+    .benefit-item {
+        &:nth-child(even) {
+            flex-direction: row;
+            .main-slide__benefit-text {
+                margin: 0 0 0 15px;
+            }
+        }
+    }
+}

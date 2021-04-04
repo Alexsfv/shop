@@ -1,0 +1,124 @@
+.main-slide {
+    margin: 60px 0 30px;
+    padding: 0 0 30px;
+    border-bottom: 1px solid #ccc;
+
+    &__body {
+        display: flex;
+    }
+
+    &__slider {
+        width: 50%;
+        min-height: 300px;
+        margin: 0 20px 0 0;
+        align-self: stretch;
+    }
+
+    &__categories {
+        display: flex;
+        width: 48.3333332%;
+
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__small-categories {
+        display: flex;
+        width: 100%;
+        margin: 0 0 20px 0;
+    }
+
+    .swiper-slide {
+        width: 100% !important;
+        max-height: 520px;
+        overflow: hidden;
+    }
+
+    .swiper-button-prev, .swiper-button-next {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: rgb(255, 255, 255);
+
+        &::after {
+            position: relative;
+            font-size: 22px;
+            color: #000;
+        }
+    }
+
+    .swiper-button-prev {
+        &::after {
+            left: -2px;
+        }
+    }
+
+    .swiper-button-next {
+        &::after {
+            left: 2px;
+        }
+    }
+
+    &__benefit {
+        display: flex;
+        width: 100%;
+        margin: 30px 0 0;
+        justify-content: space-between;
+    }
+
+    &__slider-item {
+        width: 100%;
+    }
+}
+
+@media all and (max-width: 768px) {
+    .main-slide {
+        margin: 15px 0 30px;
+
+        &__body {
+            flex-wrap: wrap;
+        }
+
+        &__slider {
+            width: 100%;
+            margin: 0 0 20px 0;
+        }
+
+        &__categories {
+            width: 100%;
+        }
+
+        &__small-categories {
+            margin: 0 0 20px 0;
+            justify-content: space-around;
+        }
+
+        &__item {
+
+            &.small {
+                width: calc(50% - 10px);
+            }
+        }
+    }
+}
+
+@media all and (max-width: 576px) {
+    .main-slide {
+        &__benefit {
+            flex-wrap: wrap;
+        }
+    }
+}
+
+@media all and (max-width: 480px) {
+    .main-slide {
+        &__slider {
+            margin: 0 0 10px 0;
+        }
+
+        &__small-categories {
+            margin: 0 0 10px 0;
+        }
+    }
+}
