@@ -20,6 +20,26 @@
 
         img {
             max-width: 100%;
+
+            &.hover-blur {
+                transition: all .3s ease;
+                &:hover {
+                    cursor: pointer;
+                    transform: scale(1.05);
+                    filter: blur(1px);
+                }
+            }
+
+            &.img-center {
+                transition: all .3s ease;
+                &.hover-blur {
+                    &:hover {
+                        cursor: pointer;
+                        transform: translate(-50%, -50%) scale(1.05);
+                        filter: blur(1px);
+                    }
+                }
+            }
         }
     }
 
@@ -31,16 +51,27 @@
         left: 50%;
         padding: 15px 25px;
         border-radius: 4px;
+        text-align: center;
         transform: translate(-50%, -50%);
         overflow: hidden;
+        pointer-events: none;
         background-color: #fff;
+    }
+
+    &__title-text, &__main-text {
+        user-select: none;
+        text-transform: uppercase;
+        font-family: Montserrat, sans-serif;
+    }
+
+    &__title-text {
+        margin: 0 0 15px;
+        font-size: 14px;
+        color: rgb(148, 148, 148);
     }
 
     &__main-text {
         margin: 0;
-        user-select: none;
-        text-transform: uppercase;
-        font-family: Montserrat, sans-serif;
         font-size: 20px;
     }
 }

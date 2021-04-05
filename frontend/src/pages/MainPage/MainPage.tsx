@@ -9,6 +9,8 @@ import MainSlideItem from '../../components/slides/MainSlideItem/MainSlideItem';
 import Benefit from '../../components/cards/Benefit/Benefit';
 import CategoryPreview from '../../components/cards/CategoryPreview/CategoryPreview';
 import MainCategory from '../../components/mainCategory/MainCategory/MainCategory';
+import SubscribeLine from '../../components/layouts/SubscribeLine/SubscribeLine';
+import Footer from '../../components/layouts/Footer/Footer';
 
 type MainPageProps = {}
 
@@ -60,19 +62,21 @@ const MainPage: React.FC<MainPageProps> = () => {
                                     imgSrc="/static/img/women-preview.jpg"
                                     alt="women"
                                     classes={['small', 'right-offset']}
+                                    imgClasses={['hover-blur']}
                                 />
                                 <CategoryPreview
                                     text="Men"
                                     imgSrc="/static/img/men-preview3.jpg"
                                     alt="men"
                                     classes={['small']}
+                                    imgClasses={['hover-blur']}
                                 />
                             </div>
                             <CategoryPreview
                                 text="Accessories"
                                 imgSrc="/static/img/accessories-preview.jpg"
                                 alt="accessories"
-                                imgClasses={['img-center']}
+                                imgClasses={['img-center', 'hover-blur']}
                             />
                         </div>
                     </div>
@@ -96,8 +100,36 @@ const MainPage: React.FC<MainPageProps> = () => {
                     <div className="main-slide__devider"></div>
                 </div>
             </div>
+
             <MainCategory categoryName="women's"/>
+
             <MainCategory categoryName="men's"/>
+
+            <div className="sales">
+                <div className="container sales__container">
+                    <div className="sales__body">
+                        <CategoryPreview
+                            title="new season"
+                            text="last products"
+                            imgSrc="/static/img/last-products.png"
+                            alt="last-products"
+                            classes={['right-offset']}
+                            imgClasses={['img-cover', 'hover-blur']}
+                        />
+                        <CategoryPreview
+                            title="sale"
+                            text="get up to 50% off"
+                            imgSrc="/static/img/sales.png"
+                            alt="last-products"
+                            imgClasses={['img-center', 'img-cover', 'hover-blur']}
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <SubscribeLine/>
+
+            <Footer/>
         </>
 
     )

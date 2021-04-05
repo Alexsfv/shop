@@ -72,6 +72,19 @@
     }
 }
 
+.sales {
+    margin: 0 0 60px;
+
+    &__body {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .right-offset {
+        margin-right: 20px;
+    }
+}
+
 @media all and (max-width: 768px) {
     .main-slide {
         margin: 15px 0 30px;
@@ -107,6 +120,19 @@
     .main-slide {
         &__benefit {
             flex-wrap: wrap;
+        }
+    }
+
+    .sales {
+        margin: 0 0 60px;
+
+        &__body {
+            flex-wrap: wrap;
+        }
+
+        .right-offset {
+            margin-right: 0;
+            margin-bottom: 20px;
         }
     }
 }

@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Header from '../../Header/Header'
+import Header from '../Header/Header'
 import './NavbarLayout.scss'
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
