@@ -1,13 +1,10 @@
 import React from 'react';
 import './App.scss';
-import NavbarLayout from './components/layouts/NavbarLayout/NavbarLayout';
-import MainPage from './pages/MainPage/MainPage';
+import Router from './router/Router';
 
 function App() {
     return (
-        <NavbarLayout>
-            <MainPage/>
-        </NavbarLayout>
+        <Router />
     )
 }
 

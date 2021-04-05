@@ -47,7 +47,7 @@ const NavbarLayout: React.FC<NavbarLayoutProps> = ({ children }) => {
             <Header ref={headerRef} />
             <nav className="navbar" style={{ top: topOffset }}>
                 <div className="container navbar__container">
-                    <p className="navbar__logo">MiSto</p>
+                    <Link to="/" className="navbar__logo">MiSto</Link>
 
                     <ul className="navbar__categories">
                         {

@@ -58,7 +58,7 @@ const Account: React.FC<AccountProps> = (props) => {
 
                         <div className="account__top">
                             <div className="account__img">
-                                <img src={newImageUrl || "/static/img/defaultAvatar.jpg"} alt="profile-photo" />
+                                <img src={newImageUrl || "/static/img/defaultAvatar.jpg"} alt="avatar" />
                                 <label className="account__new-img-field">
                                     <PublishIcon className="account__new-img-icon" />
                                     New photo

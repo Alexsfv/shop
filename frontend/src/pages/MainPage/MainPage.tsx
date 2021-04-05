@@ -3,18 +3,15 @@ import './MainPage.scss'
 import LocalShippingOutlinedIcon from '@material-ui/icons/LocalShippingOutlined';
 import UpdateOutlinedIcon from '@material-ui/icons/UpdateOutlined';
 import ContactSupportOutlinedIcon from '@material-ui/icons/ContactSupportOutlined';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwipreCore, { Navigation } from 'swiper'
-import MainSlideItem from '../../components/slides/MainSlideItem/MainSlideItem';
+import SwipreCore, { Navigation, Autoplay } from 'swiper'
 import Benefit from '../../components/cards/Benefit/Benefit';
 import CategoryPreview from '../../components/cards/CategoryPreview/CategoryPreview';
 import MainCategory from '../../components/mainCategory/MainCategory/MainCategory';
-import SubscribeLine from '../../components/layouts/SubscribeLine/SubscribeLine';
-import Footer from '../../components/layouts/Footer/Footer';
+import MainSlider from '../../components/slides/MainSlider/MainSlider';
 
 type MainPageProps = {}
 
-SwipreCore.use([Navigation])
+SwipreCore.use([Navigation, Autoplay])
 
 const MainPage: React.FC<MainPageProps> = () => {
 
@@ -24,36 +21,7 @@ const MainPage: React.FC<MainPageProps> = () => {
                 <div className="container">
                     <div className="main-slide__body">
                         <div className="main-slide__slider">
-                            <Swiper
-                                spaceBetween={0}
-                                slidesPerView={1}
-                                navigation
-                            >
-                                <SwiperSlide className="main-slide-item">
-                                    <MainSlideItem
-                                        title="banner"
-                                        description="yout title text"
-                                        imgSrc="/static/img/women-preview.jpg"
-                                        alt="women-image"
-                                    />
-                                </SwiperSlide>
-                                <SwiperSlide className="main-slide-item">
-                                    <MainSlideItem
-                                        title="banner"
-                                        description="yout title text"
-                                        imgSrc="/static/img/men-preview2.jpg"
-                                        alt="men-image"
-                                    />
-                                </SwiperSlide>
-                                <SwiperSlide className="main-slide-item">
-                                    <MainSlideItem
-                                        title="banner"
-                                        description="yout title text"
-                                        imgSrc="/static/img/home-preview.jpg"
-                                        alt="home-image"
-                                    />
-                                </SwiperSlide>
-                            </Swiper>
+                            <MainSlider/>
                         </div>
                         <div className="main-slide__categories">
                             <div className="main-slide__small-categories">
@@ -126,12 +94,7 @@ const MainPage: React.FC<MainPageProps> = () => {
                     </div>
                 </div>
             </div>
-
-            <SubscribeLine/>
-
-            <Footer/>
         </>
-
     )
 }
 

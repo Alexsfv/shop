@@ -2,6 +2,7 @@ import React from 'react'
 import './ProductCard.scss'
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Rating from '@material-ui/lab/Rating';
+import { Link } from 'react-router-dom';
 
 
 type ProductCardProps = {
@@ -18,14 +19,23 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
         previewSrc, hoverSrc
     } = props
 
+    const handleLike = (e: React.MouseEvent) => {
+        e.preventDefault()
+    }
+
     return (
         <div className="product-card">
-            <div className="product-card__img-container">
-                <img src={previewSrc} alt="product-image" className="product-card__main-img" />
-                <img src={hoverSrc} alt="product-image" className="product-card__hover-img" />
-                <FavoriteIcon className="product-card__like"/>
-            </div>
-            <p className="product-card__title">{name}</p>
+            <Link className="product-card__img-container" to="/product/1">
+                <img src={previewSrc} alt="product" className="product-card__main-img" />
+                <img src={hoverSrc} alt="product" className="product-card__hover-img" />
+                <FavoriteIcon className="product-card__like" onClick={handleLike}/>
+            </Link>
+            <Link
+                to="/product/1"
+                className="product-card__title"
+            >
+                {name}
+            </Link>
             <div className="product-card__summary">
                 <p className="product-card__price">$ {price}</p>
                 <div className="product-card__rate">

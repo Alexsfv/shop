@@ -17,9 +17,9 @@ const store = createStore(rootReducer, composeWithDevTools(
 const app = (
     <BrowserRouter>
         <Provider store={store}>
-            <React.StrictMode>
+            {/* <React.StrictMode> */}
                 <App />
-            </React.StrictMode>
+            {/* </React.StrictMode> */}
         </Provider>
     </BrowserRouter>
 )

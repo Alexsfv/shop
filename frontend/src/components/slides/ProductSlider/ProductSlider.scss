@@ -1,0 +1,134 @@
+.product-slider {
+    display: flex;
+
+    &__thumbs {
+        position: relative;
+        width: 20%;
+        margin-right: 2%;
+        max-height: 100%;
+        overflow: hidden;
+
+        & .swiper-container {
+            position: absolute;
+            width: 100%;
+            top: 40px;
+            bottom: 0;
+        }
+
+        & .swiper-slide {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__thumbs-navigate {
+        display: flex;
+
+        button {
+            height: 40px;
+            width: 50%;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            cursor: pointer;
+
+            .MuiSvgIcon-root {
+                font-size: 30px;
+                color: #5e5e5e;
+            }
+        }
+    }
+
+    &__main-slider {
+        width: 78%;
+
+        & .swiper-wrapper {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    & .swiper-button-prev,
+    & .swiper-button-next {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #f5f5f5;
+
+        &::after {
+            position: relative;
+            font-size: 22px;
+            color: #838383;
+        }
+    }
+
+    & .swiper-button-prev {
+        &::after {
+            right: 1px;
+        }
+    }
+
+    & .swiper-button-next {
+        &::after {
+            left: 1px;
+        }
+    }
+}
+
+@media all and (max-width: 992px) {
+    .product-slider {
+        &__thumbs {
+            order: 2;
+            margin-right: 0%;
+            margin-left: 2%;
+        }
+
+        &__main-slider {
+            order: 1;
+            width: 78%;
+        }
+    }
+}
+
+@media all and (max-width: 576px) {
+    .product-slider {
+        flex-wrap: wrap;
+        align-items: flex-start;
+
+        &__thumbs-navigate {
+            order: 2;
+            flex-direction: column;
+
+            button {
+                height: 50%;
+                width: 100%;
+
+                .MuiSvgIcon-root {
+                    transform: rotate(-90deg);
+                    font-size: 30px;
+                }
+            }
+        }
+
+        &__thumbs {
+            display: flex;
+            order: 2;
+            width: 100%;
+
+            margin-top: 15px;
+            margin-right: 0%;
+            margin-left: 0%;
+
+            & .swiper-container {
+                order: 1;
+                position: relative;
+                top: auto;
+                bottom: auto;
+            }
+        }
+
+        &__main-slider {
+            width: 100%;
+        }
+    }
+}
