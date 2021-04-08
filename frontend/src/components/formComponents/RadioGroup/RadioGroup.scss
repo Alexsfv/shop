@@ -1,0 +1,114 @@
+.radio-group {
+
+    &__text-block {
+        display: flex;
+        margin: 0 0 10px;
+        font-family: Montserat, sans-serif;
+    }
+
+    &__title {
+        color: #ccc;
+        margin: 0 10px 0 0;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    &__value {
+        color: #000;
+        font-weight: bold;
+        margin: 0;
+
+        &::first-letter {
+            text-transform: uppercase;
+        }
+    }
+
+    &__inputs-container {
+        display: flex;
+        max-width: 100%;
+        align-content: inherit;
+        flex-wrap: wrap;
+    }
+
+    &__input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        top: 50%;
+        left: 50%;
+        z-index: -100;
+
+        &:focus + .radio-group__fake-img-input,
+        &:focus + .radio-group__fake-text-input {
+            box-shadow: 0 0 0 2px rgb(90, 90, 90) !important;
+            &::after {
+                background-color: transparent;
+            }
+        }
+    }
+
+    &__label {
+        position: relative;
+        margin: 5px 5px;
+    }
+
+    &__fake-img-input, &__fake-text-input {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        background-color: rgb(243, 243, 243);
+        transition: border .1s ease;
+        cursor: pointer;
+        overflow: hidden;
+
+        &.active {
+            box-shadow: 0 0 0 2px #000;
+            &::after {
+                background-color: transparent;
+            }
+        }
+
+        &::after {
+            position: absolute;
+            display: block;
+            content: '';
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.15);
+            transition: all .3s ease;
+        }
+    }
+
+    &__fake-img-input {
+        max-width: 58px;
+        max-height: 90px;
+
+        img {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+
+    &__fake-text-input {
+        min-width: 40px;
+        min-height: 40px;
+        padding: 10px;
+    }
+
+    &__radio-text {
+        font-family: Montserat, sans-serif;
+        margin: 0;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #272727;
+    }
+}
+
+.product-radio-block {
+    margin-bottom: 30px;
+}

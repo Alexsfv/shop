@@ -1,9 +1,7 @@
 .cart {
-    // background-color: yellow;
 
     &__content {
         max-height: calc(100vh - 257px);
-        // background-color: pink;
         overflow: auto;
     }
 
@@ -25,7 +23,6 @@
 
     &__price-value {
         font-size: 20px;
-        // font-weight: 600;
     }
 
     &__order-btn {

@@ -1,0 +1,27 @@
+.product {
+    &__benefits {
+        display: flex;
+        margin: 20px 0 0;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    &__benefit-item {
+        display: flex;
+        margin: 5px;
+        align-items: center;
+        font-family: Montserat, sans-serif;
+        color: #979797;
+    }
+
+    &__benefit-icon {
+        margin: 0 10px 0 0;
+    }
+
+    &__benefit-text {
+        margin: 0;
+        font-size: 14px;
+        font-weight: bold;
+    }
+}
