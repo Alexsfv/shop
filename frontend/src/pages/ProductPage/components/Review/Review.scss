@@ -1,0 +1,54 @@
+.product {
+    &__review {
+        padding: 20px 0;
+        border-bottom: 1px solid #ccc;
+    }
+
+    &__review-title {
+        margin: 0 0 20px;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 14px;
+        letter-spacing: 1px;
+        color: #797979;
+    }
+
+    &__review-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__review-rate {
+        display: flex;
+    }
+
+    &__review-count {
+        margin: 0 0 0 10px;
+        font-size: 14px;
+        color: #797979;
+    }
+
+    &__review-new-btn {
+        display: flex;
+        padding: 6px 10px;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        font-size: 14px;
+        color: #797979;
+        background-color: transparent;
+
+        &:hover {
+            color: #303030;
+        }
+
+        &:active {
+            color: #161616;
+        }
+    }
+
+    &__review-new-icon {
+        margin: 0 8px 0 0;
+    }
+}

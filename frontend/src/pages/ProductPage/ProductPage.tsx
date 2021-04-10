@@ -7,6 +7,7 @@ import Benefits from './components/Benefits/Benefits'
 import Payments from './components/Payments/Payments'
 import Description from './components/Description/Description'
 import Parameters from './components/Parameters/Parameters'
+import Review from './components/Review/Review'
 
 
 type ProductPageProps = {}
@@ -71,6 +72,27 @@ const additional = [
     }
 ]
 
+const reviews = [
+    {
+        userName: 'Cleth Chabanov',
+        date: '3 month ago',
+        rate: 4,
+        text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos placeat ipsam voluptates reiciendis suscipit? Iusto ducimus aspernatur harum ea, quod cum minus facilis, illo quas, obcaecati esse! Aut, fugit nisi.'
+    },
+    {
+        userName: 'Oleg Vieshols',
+        date: '5 years ago',
+        rate: 1,
+        text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos placeat ipsam voluptates reiciendis suscipit? Iusto ducimus aspernatur harum ea, quod cum minus facilis, illo quas, obcaecati esse! Aut, fugit nisi. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos placeat ipsam voluptates reiciendis suscipit? Iusto ducimus aspernatur harum ea, quod cum minus facilis, illo quas, obcaecati esse! Aut, fugit nisi.'
+    },
+    {
+        userName: 'Alex Safronov',
+        date: '3 days ago',
+        rate: 5,
+        text: 'Lorem, ipsum dolor sit amet.'
+    },
+]
+
 const ProductPage: React.FC<ProductPageProps> = (props) => {
 
     const [color, setColor] = useState<string>(colorInputs[0].value)
@@ -124,11 +146,11 @@ const ProductPage: React.FC<ProductPageProps> = (props) => {
                             />
                             <Benefits />
                             <Payments />
-                            {/* <div className="product__devider"></div> */}
                             <Description text={descr}/>
                             <Parameters
                                 value={additional}
                             />
+                            <Review />
                         </div>
                     </div>
                 </div>
