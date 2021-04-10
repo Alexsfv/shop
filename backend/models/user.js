@@ -13,15 +13,7 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    street: {
-        type: String,
-        default: ''
-    },
     city: {
-        type: String,
-        default: ''
-    },
-    zip: {
         type: String,
         default: ''
     },
