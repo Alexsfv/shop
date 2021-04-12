@@ -150,7 +150,7 @@ const ProductPage: React.FC<ProductPageProps> = (props) => {
                             <Parameters
                                 value={additional}
                             />
-                            <Review />
+                            <Review reviews={reviews}/>
                         </div>
                     </div>
                 </div>

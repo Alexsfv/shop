@@ -1,6 +1,6 @@
 .product {
     &__review {
-        padding: 20px 0;
+        padding: 20px 0 0;
         border-bottom: 1px solid #ccc;
     }
 
@@ -50,5 +50,42 @@
 
     &__review-new-icon {
         margin: 0 8px 0 0;
+    }
+
+    &__review-item {
+        margin: 25px 0;
+    }
+
+    &__review-item-top {
+        display: flex;
+        align-items: center;
+    }
+
+    &__review-item-name {
+        margin: 0;
+        font-weight: bold;
+        color: #303030;
+    }
+
+    &__review-item-date {
+        margin: 0 5px 0 auto;
+        color: #797979;
+        font-size: 14px;
+    }
+
+    &__review-item-rate {
+        .MuiRating-icon {
+            font-size: 14px;
+        }
+    }
+
+    &__review-item-body {
+        margin: 12px 0 0;
+    }
+
+    &__review-item-description {
+        margin: 0;
+        font-size: 14px;
+        color: #797979;
     }
 }
