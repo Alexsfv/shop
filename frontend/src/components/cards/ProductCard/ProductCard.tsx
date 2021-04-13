@@ -11,20 +11,25 @@ type ProductCardProps = {
     rate: number
     previewSrc: string
     hoverSrc: string
+    classes?: string[]
 }
 
 const ProductCard: React.FC<ProductCardProps> = (props) => {
     const {
         name, price, rate,
-        previewSrc, hoverSrc
+        previewSrc, hoverSrc, classes,
     } = props
 
     const handleLike = (e: React.MouseEvent) => {
         e.preventDefault()
     }
 
+    let cardClasses = ['product-card']
+
+    if (classes) cardClasses = [...cardClasses, ...classes]
+
     return (
-        <div className="product-card">
+        <div className={cardClasses.join(' ')}>
             <Link className="product-card__img-container" to="/product/1">
                 <img src={previewSrc} alt="product" className="product-card__main-img" />
                 <img src={hoverSrc} alt="product" className="product-card__hover-img" />

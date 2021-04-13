@@ -8,6 +8,7 @@ import Payments from './components/Payments/Payments'
 import Description from './components/Description/Description'
 import Parameters from './components/Parameters/Parameters'
 import Review from './components/Review/Review'
+import ProductsLineSlider from '../../components/slides/ProductsLineSlider/ProductsLineSlider'
 
 
 type ProductPageProps = {}
@@ -153,6 +154,12 @@ const ProductPage: React.FC<ProductPageProps> = (props) => {
                             <Review reviews={reviews}/>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div className="last-products">
+                <div className="container">
+                    <ProductsLineSlider title="last products"/>
                 </div>
             </div>
         </>
