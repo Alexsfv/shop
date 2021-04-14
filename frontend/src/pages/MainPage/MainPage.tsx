@@ -29,6 +29,7 @@ const MainPage: React.FC<MainPageProps> = () => {
                                     text="Women"
                                     imgSrc="/static/img/women-preview.jpg"
                                     alt="women"
+                                    href="/catalog/women"
                                     classes={['small', 'right-offset']}
                                     imgClasses={['hover-blur']}
                                 />
@@ -36,6 +37,7 @@ const MainPage: React.FC<MainPageProps> = () => {
                                     text="Men"
                                     imgSrc="/static/img/men-preview3.jpg"
                                     alt="men"
+                                    href="/catalog/men"
                                     classes={['small']}
                                     imgClasses={['hover-blur']}
                                 />
@@ -44,6 +46,7 @@ const MainPage: React.FC<MainPageProps> = () => {
                                 text="Accessories"
                                 imgSrc="/static/img/accessories-preview.jpg"
                                 alt="accessories"
+                                href="/catalog/accessories"
                                 imgClasses={['img-center', 'hover-blur']}
                             />
                         </div>

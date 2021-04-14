@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './CategoryPreview.scss'
 
 type CategoryPreviewProps = {
@@ -8,12 +9,14 @@ type CategoryPreviewProps = {
     alt?: string
     classes?: string[]
     imgClasses?: string[]
+    href?: string
 }
 
 const CategoryPreview: React.FC<CategoryPreviewProps> = (props) => {
     const {
         text, imgSrc, classes,
         alt, imgClasses, title,
+        href,
     } = props
 
     let wrapClasses = ['category-preview']
@@ -21,7 +24,7 @@ const CategoryPreview: React.FC<CategoryPreviewProps> = (props) => {
     if (classes) wrapClasses = [...wrapClasses, ...classes]
 
     return (
-        <div className={wrapClasses.join(' ')}>
+        <Link to={href || '#'} className={wrapClasses.join(' ')}>
             <div className="category-preview__img">
                 <img src={imgSrc} alt={alt || text} className={imgClasses?.join(' ')} />
             </div>
@@ -36,7 +39,7 @@ const CategoryPreview: React.FC<CategoryPreviewProps> = (props) => {
                     {text}
                 </p>
             </div>
-        </div>
+        </Link>
     )
 }
 

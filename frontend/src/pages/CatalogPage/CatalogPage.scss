@@ -1,0 +1,167 @@
+.catalog-title {
+    font-family: Montserat, sans-serif;
+    background-color: rgba(204, 204, 204, 0.3);
+    margin: 0;
+    padding: 20px 0;
+
+    &__text {
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+}
+
+.filter {
+    margin: 20px 0 30px;
+
+    &__panel {
+        display: flex;
+        align-items: center;
+    }
+
+    &__show-filter-btn {
+        display: flex;
+        padding: 6px 12px !important;
+        align-items: center;
+        color: rgb(66, 66, 66);
+        transition: color .2 ease;
+
+        &:hover {
+            color: rgb(31, 31, 31);
+        }
+
+        &:active {
+            color:  #000;
+        }
+
+        span {
+            font-family: Montserat, sans-serif;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .icon {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+    }
+
+    &__filter-by-btn {
+        display: flex;
+        align-items: center;
+
+        .MuiSvgIcon-root {
+            position: relative;
+            top: -1px;
+            transform: translate(0px, 0px) rotate(0deg);
+            transition: transform .3s ease;
+        }
+
+        &.active {
+
+            .MuiSvgIcon-root {
+                transform: translate(0px, 0px) rotate(90deg);
+            }
+        }
+    }
+
+    &__filter-by-item {
+        padding: 5px 10px !important;
+
+        .MuiTypography-root {
+            font-size: 16px;
+        }
+
+        .MuiSvgIcon-root {
+            font-size: 22px;
+            margin-right: 5px;
+        }
+    }
+
+    &__asc-btn {
+
+        .icon {
+            transform: rotate(0deg);
+            transition: transform .3s ease;
+
+            &.rotate {
+                transform: rotate(90deg);
+            }
+        }
+    }
+
+    &__pagination {
+        margin-left: auto;
+    }
+}
+
+.cards {
+    &__container {
+        padding: 0;
+    }
+
+    &__body {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__footer {
+        display: flex;
+        width: 100%;
+        margin: 20px 0 50px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__footer-icon {
+        width: 30px;
+        height: 30px;
+        background-color: #000;
+        transform: rotate(45deg);
+    }
+}
+
+@media all and (max-width: 1230px) {
+    .cards {
+        &__container {
+            padding: 0 15px;
+        }
+
+        &__body {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+    }
+}
+
+@media all and (max-width: 768px) {
+    .filter {
+        &__panel {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        &__pagination {
+            display: flex;
+            width: 100%;
+            margin: 20px 0 0;
+            justify-content: center;
+        }
+    }
+}
+
+@media all and (max-width: 576px) {
+    .filter {
+        &__pagination {
+            .MuiPagination-ul {
+                flex-wrap: nowrap;
+            }
+
+            .MuiButtonBase-root {
+
+            }
+        }
+    }
+}
