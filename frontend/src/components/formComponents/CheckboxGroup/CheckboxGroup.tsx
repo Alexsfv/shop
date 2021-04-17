@@ -1,30 +1,6 @@
 import React from 'react'
+import Checkbox from '../Checkbox/Checkbox'
 import './CheckboxGroup.scss'
-
-
-
-
-import { withStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import Favorite from '@material-ui/icons/Favorite';
-import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-
-const GreenCheckbox = withStyles({
-  root: {
-    color: green[400],
-    '&$checked': {
-      color: green[600],
-    },
-  },
-  checked: {},
-})((props: CheckboxProps) => <Checkbox color="default" {...props} />);
-
-
 
 type CheckboxGroupProps = {
     value: string[]
@@ -51,35 +27,17 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = (props) => {
     return (
         <div className={wrapClasses.join(' ')}>
             <p className="checkboxes__title">{title}</p>
-            <ul className="checkboxes__list">
+            <ul>
                 {
                     data.map((item, i) => (
                         <li key={i} className="checkboxes__item">
-                            <FormControlLabel
-                                control={<GreenCheckbox checked={value.includes(item.value)} onChange={handleChange} name={name} />}
-                                label="Custom color"
+                            <Checkbox
+                                label={item.title}
+                                name={name}
+                                value={item.value}
+                                checked={value.includes(item.value)}
+                                onChange={handleChange}
                             />
-                            {/* <label className="checkboxes__label">
-                                <input
-                                    type="checkbox"
-                                    name={name}
-                                    value={item.value}
-                                    className="checkboxes__input"
-                                    checked={value.includes(item.value)}
-                                    onChange={handleChange}
-                                />
-                                {
-                                    item.color &&
-                                        <div
-                                            className="checkboxes__item-color"
-                                            style={{ backgroundColor: item.color }}
-                                        >
-                                        </div>
-                                }
-                                <span className="checkboxes__text">
-                                    { item.title }
-                                </span>
-                            </label> */}
                         </li>
                     ))
                 }

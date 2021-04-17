@@ -65,7 +65,8 @@ const ProductsLineSlider: React.FC<ProductsLineSliderProps> = (props) => {
                                     rate={3}
                                     previewSrc="/static/img/men-preview2.jpg"
                                     hoverSrc="/static/img/men-preview.jpg"
-                                    classes={['products-line-card']}
+                                    wrapClasses={['products-line-card']}
+                                    liked={i % 2 === 0}
                                 />
                             </SwiperSlide>
                         ))

@@ -40,10 +40,9 @@
             cursor: pointer;
         }
 
-        &:focus {
-
+        &.active {
             .MuiSvgIcon-root {
-                color: rgba(255, 0, 0, 0.349);
+                color: rgb(255, 0, 0);
             }
         }
     }

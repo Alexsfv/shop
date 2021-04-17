@@ -296,7 +296,6 @@ const CatalogPage: React.FC<CatalogPageProps> = (props) => {
                                         data={color}
                                         title="color"
                                         classes={['w230', 'h400']}
-
                                         onChange={val => toggleCheckbox('color', val)}
                                     />
                                     <CheckboxGroup

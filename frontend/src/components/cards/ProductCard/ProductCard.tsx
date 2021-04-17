@@ -11,29 +11,34 @@ type ProductCardProps = {
     rate: number
     previewSrc: string
     hoverSrc: string
-    classes?: string[]
+    liked?: boolean
+    wrapClasses?: string[]
 }
 
 const ProductCard: React.FC<ProductCardProps> = (props) => {
     const {
         name, price, rate,
-        previewSrc, hoverSrc, classes,
+        previewSrc, hoverSrc, wrapClasses,
+        liked,
     } = props
 
     const handleLike = (e: React.MouseEvent) => {
         e.preventDefault()
     }
 
-    let cardClasses = ['product-card']
+    const cardClasses = () => {
+        let classes = ['product-card']
+        if (wrapClasses) classes = [...classes, ...wrapClasses]
+        return classes.join(' ')
+    }
 
-    if (classes) cardClasses = [...cardClasses, ...classes]
 
     return (
-        <div className={cardClasses.join(' ')}>
+        <div className={cardClasses()}>
             <Link className="product-card__img-container" to="/product/1">
                 <img src={previewSrc} alt="product" className="product-card__main-img" />
                 <img src={hoverSrc} alt="product" className="product-card__hover-img" />
-                <button className="product-card__like-btn">
+                <button className={liked ? "product-card__like-btn active" : "product-card__like-btn"}>
                     <FavoriteIcon className="product-card__like-icon" onClick={handleLike} />
                 </button>
             </Link>

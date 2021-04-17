@@ -8,6 +8,7 @@ import { rootReducer } from './store/reducers/rootReducer';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { BrowserRouter } from 'react-router-dom';
+import focusCleanner from './utils/focusCleanner';
 
 
 const store = createStore(rootReducer, composeWithDevTools(
@@ -25,3 +26,4 @@ const app = (
 )
 
 ReactDOM.render(app, document.getElementById('root'))
+focusCleanner.activate()

@@ -1,6 +1,6 @@
 .btn {
     cursor: pointer;
-    outline: none;
+
     border: none;
     transition: all .3s ease;
 }
@@ -8,7 +8,6 @@
 .btn-primary {
     &:hover,
     &:focus {
-        outline: none;
         color: #00C0D1;
     }
 
@@ -23,7 +22,6 @@
 
     &:hover,
     &:focus {
-        outline: none;
         color: #d6b857;
     }
 
@@ -38,7 +36,6 @@
 
     &:hover,
     &:focus {
-        outline: none;
         background-color: #CFD3D9;
     }
 
@@ -50,7 +47,6 @@
 .btn-danger {
     &:hover,
     &:focus {
-        outline: none;
         color: #ff0000;
     }
 
