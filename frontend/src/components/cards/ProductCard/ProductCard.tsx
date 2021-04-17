@@ -33,7 +33,9 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
             <Link className="product-card__img-container" to="/product/1">
                 <img src={previewSrc} alt="product" className="product-card__main-img" />
                 <img src={hoverSrc} alt="product" className="product-card__hover-img" />
-                <FavoriteIcon className="product-card__like" onClick={handleLike}/>
+                <button className="product-card__like-btn">
+                    <FavoriteIcon className="product-card__like-icon" onClick={handleLike} />
+                </button>
             </Link>
             <Link
                 to="/product/1"
@@ -44,7 +46,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
             <div className="product-card__summary">
                 <p className="product-card__price">$ {price}</p>
                 <div className="product-card__rate">
-                    <Rating name="disabled" size="small" value={rate} disabled/>
+                    <Rating name="disabled" size="small" value={rate} disabled />
                 </div>
             </div>
         </div>

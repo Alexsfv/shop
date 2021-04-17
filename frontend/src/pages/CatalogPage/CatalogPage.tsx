@@ -14,6 +14,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import SendIcon from '@material-ui/icons/Send';
 import ProductCard from '../../components/cards/ProductCard/ProductCard';
+import CheckboxGroup from '../../components/formComponents/CheckboxGroup/CheckboxGroup';
 
 
 
@@ -42,6 +43,101 @@ const sortItems = [
     },
 ]
 
+const sizes = [
+    {
+        value: 'xl',
+        title: 'XL',
+    },
+    {
+        value: 'l',
+        title: 'L',
+    },
+    {
+        value: 'm',
+        title: 'M',
+    },
+    {
+        value: 's',
+        title: 's',
+    },
+    {
+        value: 'xs',
+        title: 'XS',
+    },
+]
+
+const brands = [
+    {
+        value: 'nike',
+        title: 'Nike',
+    },
+    {
+        value: 'h&m',
+        title: 'H&M',
+    },
+    {
+        value: 'gucci',
+        title: 'Gucci',
+    },
+]
+
+const price = [
+    {
+        value: '0-100',
+        title: '$0 - $100',
+    },
+    {
+        value: '101-300',
+        title: '$101 - $300',
+    },
+    {
+        value: '301-500',
+        title: '$301 - $500',
+    },
+    {
+        value: '501-700',
+        title: '$501 - $700',
+    },
+    {
+        value: '701-1200',
+        title: '$701 - $1200',
+    },
+    {
+        value: '1200+',
+        title: '$1200+',
+    },
+]
+
+const color = [
+    {
+        value: 'black',
+        title: 'Black',
+        color: "#000"
+    },
+    {
+        value: 'blue',
+        title: 'Blue',
+        color: "#00f"
+    },
+    {
+        value: 'white',
+        title: 'White',
+        color: "#fff"
+    },
+    {
+        value: 'grey',
+        title: 'Grey',
+        color: "#ccc"
+    },
+]
+
+type FilterState = {
+    size: string[]
+    brand: string[]
+    color: string[]
+    price: string[]
+}
+
 const CatalogPage: React.FC<CatalogPageProps> = (props) => {
     const {
         match
@@ -52,6 +148,12 @@ const CatalogPage: React.FC<CatalogPageProps> = (props) => {
     const [ascSort, setAscSort] = useState<boolean>(true)
     const [page, setPage] = useState<number>(6)
     const [isSmallPaginator, setSmallPaginator] = useState<boolean>(false)
+    const [filter, setFilter] = useState<FilterState>({
+        size: [],
+        brand: [],
+        price: [],
+        color: [],
+    })
 
     const [fetchingData, setFetchingData] = useState<boolean>(false)
 
@@ -79,6 +181,17 @@ const CatalogPage: React.FC<CatalogPageProps> = (props) => {
         }, 2000)
     }
 
+    const toggleCheckbox = (fieldName: keyof FilterState, value: string) => {
+        const newFilter = { ...filter }
+        if (filter[fieldName].includes(value)) {
+            const newValues = filter[fieldName].filter(v => v !== value)
+            newFilter[fieldName] = newValues
+            return setFilter(newFilter)
+        }
+        newFilter[fieldName].push(value)
+        setFilter(newFilter)
+    }
+
     useEffect(() => {
         const handleResize = (e: UIEvent) => {
             const width = window.innerWidth
@@ -94,6 +207,7 @@ const CatalogPage: React.FC<CatalogPageProps> = (props) => {
         }
     }, [isSmallPaginator])
 
+
     return (
         <>
             <section className="catalog-title">
@@ -106,7 +220,10 @@ const CatalogPage: React.FC<CatalogPageProps> = (props) => {
             <section className="filter">
                 <div className="container">
                     <div className="filter__panel">
-                        <Button className="filter__show-filter-btn">
+                        <Button
+                            className="filter__show-filter-btn"
+                            onClick={() => setShowFilter(!showFilter)}
+                        >
                             <TuneIcon className="icon" />
                             <span>filter</span>
                         </Button>
@@ -167,6 +284,51 @@ const CatalogPage: React.FC<CatalogPageProps> = (props) => {
                             className="filter__pagination"
                             onChange={handlePaginate}
                         />
+                    </div>
+                    <div className={showFilter ? "filter__body active" : "filter__body"}>
+
+                        {
+                            new Array(1).fill('').map(() => (
+                                <>
+                                    <CheckboxGroup
+                                        value={filter.color}
+                                        name="color"
+                                        data={color}
+                                        title="color"
+                                        classes={['w230', 'h400']}
+
+                                        onChange={val => toggleCheckbox('color', val)}
+                                    />
+                                    <CheckboxGroup
+                                        value={filter.size}
+                                        name="size"
+                                        data={sizes}
+                                        title="size"
+                                        classes={['w230', 'h400']}
+
+                                        onChange={val => toggleCheckbox('size', val)}
+                                    />
+                                    <CheckboxGroup
+                                        value={filter.brand}
+                                        name="brand"
+                                        data={brands}
+                                        title="brand"
+                                        classes={['w230', 'h400']}
+
+                                        onChange={val => toggleCheckbox('brand', val)}
+                                    />
+                                    <CheckboxGroup
+                                        value={filter.price}
+                                        name="price"
+                                        data={price}
+                                        title="price"
+                                        classes={['w230', 'h400']}
+
+                                        onChange={val => toggleCheckbox('price', val)}
+                                    />
+                                </>
+                            ))
+                        }
                     </div>
                 </div>
             </section>

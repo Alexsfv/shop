@@ -1,0 +1,65 @@
+.checkboxes {
+    width: 100%;
+    font-family: Montserat, sans-serif;
+
+    &__title {
+        margin: 0 0 15px;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    &__list {
+    }
+
+    &__item {
+        margin: 12px 0;
+    }
+
+    &__label {
+        display: flex;
+        align-items: center;
+
+        &:hover {
+            cursor: pointer;
+
+            .checkboxes__text {
+                color: #000;
+            }
+        }
+    }
+
+    &__input {
+        display: block;
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    &__text {
+        margin: 0 0 0 10px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: rgb(97, 97, 97);
+        transition: color .3s ease;
+    }
+
+    &__item-color {
+        width: 18px;
+        height: 18px;
+        margin: 0 0 0 10px;
+        border-radius: 50%;
+        box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.7);
+    }
+}
+
+.checkboxes.w230 {
+    max-width: 230px;
+}
+
+.checkboxes.h400 {
+    max-height: 400px;
+    overflow: auto;
+}

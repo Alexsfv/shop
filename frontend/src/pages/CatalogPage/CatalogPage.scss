@@ -94,6 +94,26 @@
     &__pagination {
         margin-left: auto;
     }
+
+    &__body {
+        display: flex;
+        height: 0;
+        margin: 15px 0 0;
+        padding: 0 0;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        transition: all .5s ease;
+        background-color: rgba(204, 204, 204, 0.3);
+        opacity: 0;
+        overflow: hidden;
+
+        &.active {
+            height: 350px;
+            padding: 30px 40px;
+            opacity: 1;
+
+        }
+    }
 }
 
 .cards {
