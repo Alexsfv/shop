@@ -29,7 +29,7 @@ router.post('/login', async (req, res) => {
     if (!user) {
         return res.status(400).send('The user not found!')
     }
-    if (user && bcrypt.compareSync(req.body.password, user.passwordHash)) {
+    if (user && bcrypt.compareSync(req.body.password.toString(), user.passwordHash)) {
         const token = jwt.sign(
             {
                 userId: user.id,
@@ -47,9 +47,15 @@ router.post('/login', async (req, res) => {
 })
 
 router.post('/register', async (req, res) => {
-    if (!req.body.email) return res.status(400).send('Email is required')
-    if (!req.body.name) return res.status(400).send('Name is required')
-    if (!req.body.password) return res.status(400).send('Password is required')
+    if (!req.body.email) return res.status(400).json({ success: false, message: 'Email is required' })
+    if (!req.body.name) return res.status(400).json({ success: false, message: 'Name is required' })
+    if (!req.body.password) return res.status(400).json({ success: false, message: 'Password is required' })
+
+    const registeredUser = await User.findOne({ email: req.body.email })
+    if (registeredUser) return res.status(400).json({
+        success: false,
+        message: 'A user with this email address is already registered'
+    })
 
     let user = new User({
         email: req.body.email,
@@ -59,9 +65,15 @@ router.post('/register', async (req, res) => {
     user = await user.save()
 
     if (!user) {
-        return res.status(400).send('the user cannot be created!')
+        return res.status(400).json({
+            success: false,
+            message: 'Error when creating a user'
+        })
     }
-    res.send(user)
+    res.json({
+        success: true,
+        message: ''
+    })
 })
 
 router.get('/get/count', async (req, res) => {
