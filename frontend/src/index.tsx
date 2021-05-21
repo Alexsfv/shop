@@ -9,11 +9,14 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { BrowserRouter } from 'react-router-dom';
 import focusCleanner from './utils/focusCleanner';
+import createSagaMiddleware from 'redux-saga'
+import { userSaga } from './store/saga/userSaga';
 
-
+const sagaMiddleware = createSagaMiddleware()
 const store = createStore(rootReducer, composeWithDevTools(
-    applyMiddleware(),
+    applyMiddleware(sagaMiddleware),
 ))
+sagaMiddleware.run(userSaga)
 
 const app = (
     <BrowserRouter>

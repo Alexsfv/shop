@@ -8,6 +8,7 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import SwipeableViews from 'react-swipeable-views';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import { sideMenuActions } from '../../../store/actions/sideMenuActions'
 
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
@@ -18,6 +19,9 @@ import AuthorizeUser from '../AuthorizeUser/AuthorizeUser';
 import Account from '../Account/Account';
 import FlightIcon from '@material-ui/icons/Flight';
 import Orders from '../Orders/Orders';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../store/reducers/rootReducer';
+import { SideMenuState } from '../../../store/reducers/sideMenuReducer';
 
 type SideMenuProps = {
     isShow: boolean
@@ -26,19 +30,23 @@ type SideMenuProps = {
     onClose: () => void
 }
 
-const headers = ['search', 'favourite', 'shopping cart', 'account', 'orders']
+const headers = ['account', 'search', 'favourite', 'shopping cart', 'orders']
 
 const SideMenu: React.FC<SideMenuProps> = (props) => {
-    const { isShow, onClose } = props
+    const {
+        isShow, onClose
+    } = props
 
-    const [value, setValue] = useState<number>(0)
-    const [isAuth, setAuth] = useState<boolean>(true)
+    const state = useSelector((state: RootState) => state.sideMenu) as SideMenuState
+    const dispatch = useDispatch()
+
+    const [isAuth, setAuth] = useState<boolean>(false)
 
     const handleChange = (e: React.ChangeEvent<{}>, newValue: number) => {
-        setValue(newValue);
+        dispatch(sideMenuActions.setIndex(newValue))
     }
     const handleChangeIndex = (index: number) => {
-        setValue(index);
+        dispatch(sideMenuActions.setIndex(index))
     }
 
     return (
@@ -63,7 +71,7 @@ const SideMenu: React.FC<SideMenuProps> = (props) => {
                     <div className="side-menu__body">
 
                         <div className="side-menu__header">
-                            <p className="side-menu__header-text">{headers[value]}</p>
+                            <p className="side-menu__header-text">{headers[state.currentIndex]}</p>
                             <button className="side-menu__close-btn btn btn-primary" onClick={onClose}>
                                 <CloseIcon />
                             </button>
@@ -72,35 +80,35 @@ const SideMenu: React.FC<SideMenuProps> = (props) => {
                         <div className="side-menu__content">
                             <SwipeableViews
                                 axis={'x'}
-                                index={value}
+                                index={state.currentIndex}
                                 onChangeIndex={handleChangeIndex}
                             >
-                                <Search value={value} index={0}/>
-                                <Favourites value={value} index={1}/>
-                                <Cart value={value} index={2}/>
                                 {
                                     isAuth
-                                        ? <Account value={value} index={3}/>
-                                        : <AuthorizeUser value={value} index={3}/>
+                                        ? <Account value={state.currentIndex} index={0}/>
+                                        : <AuthorizeUser value={state.currentIndex} index={0}/>
                                 }
+                                <Search value={state.currentIndex} index={1}/>
+                                <Favourites value={state.currentIndex} index={2}/>
+                                <Cart value={state.currentIndex} index={3}/>
                                 {
                                     isAuth &&
-                                    <Orders value={value} index={4}/>
+                                    <Orders value={state.currentIndex} index={4}/>
                                 }
                             </SwipeableViews>
                         </div>
 
                         <div className="side-menu__footer">
                             <Tabs
-                                value={value}
+                                value={state.currentIndex}
                                 onChange={handleChange}
                                 variant="fullWidth"
                                 aria-label="icon tabs example"
                             >
+                                <Tab icon={<PersonPinIcon />} aria-label="person"/>
                                 <Tab icon={<SearchIcon />} aria-label="search"/>
                                 <Tab icon={<FavoriteIcon />} aria-label="favorite"/>
                                 <Tab icon={<ShoppingBasketIcon />} aria-label="cart"/>
-                                <Tab icon={<PersonPinIcon />} aria-label="person"/>
                                 {isAuth && <Tab icon={<FlightIcon />} aria-label="orders"/>}
                             </Tabs>
                         </div>

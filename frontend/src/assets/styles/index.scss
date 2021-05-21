@@ -33,3 +33,11 @@ body.lock {
     width: 100%;
     height: 100%;
 }
+
+.clear-focus {
+    &:focus {
+        // if need to save box-shadow from default, use wrappers
+        outline: none !important;
+        box-shadow: none !important;
+    }
+}

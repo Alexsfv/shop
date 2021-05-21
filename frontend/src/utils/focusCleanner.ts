@@ -1,31 +1,52 @@
 class FocusCleanner {
-    clearNodes: string[]
-    target: HTMLElement | null = null
+    clearTags: string[]
+    clearNode: HTMLElement | null = null
 
-    constructor(clearNodes: string[]) {
-        this.clearNodes = clearNodes
+    constructor(clearTags: string[]) {
+        this.clearTags = clearTags
     }
 
     addClearStyles(e: MouseEvent) {
-        if (!this.shouldClearFocus(e) || !this.target) return false
-        this.target.classList.add('clear-focus')
-        this.target.blur()
+        if (!this.shouldClearFocus(e) || !this.clearNode) return false
+        this.clearNode.classList.add('clear-focus')
+        this.clearNode.blur()
+        this.clearNode = null
     }
     removeClearStyles(e: MouseEvent) {
-        if (!this.shouldClearFocus(e) || !this.target) return false
-        const hasClearStyles = this.target.classList.contains('clear-focus')
+        if (!this.shouldClearFocus(e) || !this.clearNode) return false
+        const hasClearStyles = this.clearNode.classList.contains('clear-focus')
         if (hasClearStyles) {
-            this.target.blur()
-            this.target.classList.remove('clear-focus')
-            this.target = null
+            this.clearNode.blur()
+            this.clearNode.classList.remove('clear-focus')
+            this.clearNode = null
         }
     }
     shouldClearFocus(e: MouseEvent) {
-        this.target = e.target as HTMLElement | null
-        if (!this.target) {
+        const target = e.target as HTMLElement | null
+        if (!target) {
+            this.clearNode = null
             return false
         }
-        return this.clearNodes.includes(this.target.nodeName)
+        this.findClearNode(target)
+        if (!this.clearNode) {
+            this.clearNode = null
+            return false
+        }
+        return true
+    }
+    findClearNode(target: HTMLElement) {
+        let closestNode: HTMLElement | null = null
+
+        if (this.clearTags.includes(target.tagName.toLowerCase())) {
+            closestNode = target
+        }
+        if (!closestNode) {
+            this.clearTags.forEach(selector => {
+                const closest = target.closest(selector) as HTMLElement | null
+                if (closest && !closestNode) closestNode = closest
+            })
+        }
+        this.clearNode = closestNode
     }
     handleMouseDown = (e: MouseEvent) => {
         this.addClearStyles(e)
@@ -48,4 +69,4 @@ class FocusCleanner {
     }
 }
 
-export default new FocusCleanner(['BUTTON', 'A'])
+export default new FocusCleanner(['button', 'a'])

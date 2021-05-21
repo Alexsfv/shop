@@ -14,7 +14,6 @@
         width: 100%;
         height: 100%;
         overflow: auto;
-        // background-color: red;
     }
 
     &__footer {
@@ -35,14 +34,16 @@
     }
 
     &__form-btn {
+        display: flex;
         width: 100%;
         padding: 14px 8px;
+        align-items: center;
+        justify-content: center;
         font-size: 17px;
         font-weight: 300;
         text-transform: uppercase;
 
         &.login {
-            display: block;
             margin-top: 30px;
         }
 
@@ -50,6 +51,22 @@
             margin-top: auto;
         }
     }
+
+    &__form-loader {
+        width: 24px !important;
+        height: 24px !important;
+        margin: 0 0 0 15px;
+        color: #fff !important;
+    }
+
+    &__form-error {
+        color: #dc3545;
+    }
+
+    &__form-success {
+        color: #28a745;
+    }
+
 
     .MuiInputBase-root {
         padding: 0;

@@ -17,7 +17,7 @@ const Order: React.FC<OrderProps> = (props) => {
             <div className="orders__parameters">
                 {
                     parameters.map(p => (
-                        <div className="orders__parameter">
+                        <div className="orders__parameter" key={Math.random()}>
                             <span className="orders__parameter-name">{ p.name }:</span>
                             <span className="orders__parameter-value">{ p.value }</span>
                         </div>

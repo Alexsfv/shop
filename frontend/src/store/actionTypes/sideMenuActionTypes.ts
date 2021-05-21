@@ -1,0 +1,1 @@
+export const SIDE_MENU_SET_INDEX = 'SIDE_MENU_SET_INDEX'
