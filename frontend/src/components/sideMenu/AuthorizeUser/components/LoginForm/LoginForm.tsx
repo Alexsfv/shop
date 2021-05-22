@@ -3,6 +3,10 @@ import { useFormik } from 'formik';
 import { LoginFormValues } from '../../../../../types/forms';
 import { initialLoginForm, valiateLoginForm } from './formData/loginFormData';
 import LoginFormInputs from './components/LoginFormInputs/LoginFormInputs';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../../store/reducers/rootReducer';
+import { UserState } from '../../../../../store/reducers/userReducer';
+import { userSagaActions } from '../../../../../store/saga/userSaga';
 
 
 type LoginFormProps = {
@@ -12,10 +16,13 @@ type LoginFormProps = {
 const LoginForm: React.FC<LoginFormProps> = (props) => {
     const { handleChangeForm } = props
 
+    const formState = useSelector<RootState>(state => state.user.loginForm) as UserState['loginForm']
     const [showPassword, setShowPassword] = useState<boolean>(false)
 
-    const handleSubmit = (values: LoginFormValues) => {
+    const dispatch = useDispatch()
 
+    const handleSubmit = (values: LoginFormValues) => {
+        dispatch(userSagaActions.login(values))
     }
 
     const formik = useFormik<LoginFormValues>({
@@ -23,7 +30,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
         validate: valiateLoginForm,
         onSubmit: handleSubmit,
     })
-
+    // asdasd@sdd.ty
     return (
         <div className="auth-user__content">
             <p className="auth-user__form-title">
@@ -31,7 +38,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
             </p>
             <form className="auth-user__body" onSubmit={e => e.preventDefault()}>
                 <LoginFormInputs
-                    isFetching={true}
+                    isFetching={formState.isFetching}
                     showPassword={showPassword}
                     values={formik.values}
                     errors={formik.errors}
@@ -41,10 +48,9 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
                     onToggleShowPassword={() => setShowPassword(!showPassword)}
                 />
                 {
-                    // registerForm.message &&
+                    formState.success === false &&
                     <p className="auth-user__form-error">
-                        {/* {registerForm.message} */}
-                        some errors
+                        Invalid username or password
                     </p>
                 }
             </form>

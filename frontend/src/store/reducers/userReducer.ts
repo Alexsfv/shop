@@ -1,5 +1,10 @@
 import { AllUserActions } from "../actions/userActions"
-import { USER_CLEAR_STATUS_REGISTER, USER_FETCH_REGISTER, USER_LOGOUT, USER_SET_STATUS_REGISTER, USER_UPDATE_INFO } from "../actionTypes/userActionTypes"
+import { USER_LOGOUT, USER_SET_STATUS_LOGIN, USER_SET_STATUS_REGISTER, USER_INITIAL } from "../actionTypes/userActionTypes"
+
+type FormState = {
+    isFetching: boolean
+    success: boolean | null
+}
 
 export type UserState = {
     isAuth: boolean
@@ -11,11 +16,8 @@ export type UserState = {
         country: string
         city: string
     },
-    registerForm: {
-        isFetching: boolean
-        success: boolean | null
-        message: string
-    }
+    registerForm: FormState
+    loginForm: FormState
 }
 
 const userState: UserState = {
@@ -31,15 +33,19 @@ const userState: UserState = {
     registerForm: {
         isFetching: false,
         success: null,
-        message: '',
+    },
+    loginForm: {
+        isFetching: false,
+        success: null,
     }
 }
 
 export const userReducer = (state = userState, action: AllUserActions): UserState => {
     switch(action.type) {
-        case(USER_UPDATE_INFO): {
+        case(USER_INITIAL): {
             return {
                 ...state,
+                isAuth: true,
                 info: {
                     ...state.info,
                     ...action.payload
@@ -53,32 +59,23 @@ export const userReducer = (state = userState, action: AllUserActions): UserStat
                 info: {...userState.info}
             }
         }
-        case(USER_FETCH_REGISTER): {
-            return {
-                ...state,
-                registerForm: {
-                    ...state.registerForm,
-                    isFetching: true,
-                    message: '',
-                }
-            }
-        }
-        case(USER_CLEAR_STATUS_REGISTER): {
-            return {
-                ...state,
-                registerForm: {
-                    ...userState.registerForm
-                }
-            }
-        }
         case(USER_SET_STATUS_REGISTER): {
             return {
                 ...state,
                 registerForm: {
                     ...state.registerForm,
-                    isFetching: false,
+                    isFetching: action.payload.isFetching,
                     success: action.payload.success,
-                    message: action.payload.message
+                }
+            }
+        }
+        case(USER_SET_STATUS_LOGIN): {
+            return {
+                ...state,
+                loginForm: {
+                    ...state.loginForm,
+                    isFetching: action.payload.isFetching,
+                    success: action.payload.success,
                 }
             }
         }

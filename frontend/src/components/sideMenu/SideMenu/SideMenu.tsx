@@ -22,6 +22,7 @@ import Orders from '../Orders/Orders';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/reducers/rootReducer';
 import { SideMenuState } from '../../../store/reducers/sideMenuReducer';
+import { UserState } from '../../../store/reducers/userReducer';
 
 type SideMenuProps = {
     isShow: boolean
@@ -37,10 +38,9 @@ const SideMenu: React.FC<SideMenuProps> = (props) => {
         isShow, onClose
     } = props
 
-    const state = useSelector((state: RootState) => state.sideMenu) as SideMenuState
+    const state = useSelector<RootState>(state => state.sideMenu) as SideMenuState
+    const isAuth = useSelector<RootState>(state => state.user.isAuth) as boolean
     const dispatch = useDispatch()
-
-    const [isAuth, setAuth] = useState<boolean>(false)
 
     const handleChange = (e: React.ChangeEvent<{}>, newValue: number) => {
         dispatch(sideMenuActions.setIndex(newValue))

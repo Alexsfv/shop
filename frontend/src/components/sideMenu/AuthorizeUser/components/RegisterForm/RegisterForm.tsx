@@ -39,7 +39,10 @@ const RegisterForm: React.FC<LoginFormProps> = (props) => {
         formik.setValues(initialRegisterForm)
         formik.setErrors(clearRegisterFormErrors)
         setTimeout(() => {
-            dispatch(userActions.clearRegisterStatus())
+            dispatch(userActions.setRegisterStatus({
+                isFetching: false,
+                success: null
+            }))
         }, 2500)
     }, [registerForm.success])
 
@@ -61,15 +64,15 @@ const RegisterForm: React.FC<LoginFormProps> = (props) => {
                     onToggleShowPassword={() => setShowPassword(!showPassword)}
                 />
                 {
-                    registerForm.success && !registerForm.message &&
+                    registerForm.success &&
                     <p className="auth-user__form-success">
                         User created successfully
                     </p>
                 }
                 {
-                    registerForm.message &&
+                    registerForm.success === false &&
                     <p className="auth-user__form-error">
-                        {registerForm.message}
+                        This email is already registered
                     </p>
                 }
             </form>

@@ -1,42 +1,33 @@
-import { RegisterFormValues } from "../../types/forms"
 import { AllActions } from "../../types/other"
-import { USER_CLEAR_STATUS_REGISTER, USER_FETCH_REGISTER, USER_LOGOUT, USER_SET_STATUS_REGISTER, USER_UPDATE_INFO } from "../actionTypes/userActionTypes"
+import { USER_LOGOUT, USER_SET_STATUS_LOGIN, USER_SET_STATUS_REGISTER, USER_INITIAL } from "../actionTypes/userActionTypes"
 import { UserState } from "../reducers/userReducer"
-import { SAGA_INITIAL_USER, SAGA_REGISTER_USER } from "../saga/actionTypes"
 
 export const userActions = {
-    updateInfo(newInfo: UserState['info']) {
-        return {
-            type: USER_UPDATE_INFO,
-            payload: newInfo
-        } as const
-    },
     logout() {
         return {
             type: USER_LOGOUT
         } as const
     },
-    initial() {
+    initial(payload: UserState['info']) {
+        console.log('payload 23', payload);
+        
         return {
-            type: SAGA_INITIAL_USER
+            type: USER_INITIAL,
+            payload
         } as const
     },
-    fetchRegister() {
-        return {
-            type: USER_FETCH_REGISTER
-        } as const
-    },
-    setRegisterStatus(payload: { success: boolean, message: string }) {
+    setRegisterStatus(payload: { success: boolean | null, isFetching: boolean }) {
         return {
             type: USER_SET_STATUS_REGISTER,
             payload
         } as const
     },
-    clearRegisterStatus() {
+    setLoginStatus(payload: { success: boolean | null, isFetching: boolean }) {
         return {
-            type: USER_CLEAR_STATUS_REGISTER
+            type: USER_SET_STATUS_LOGIN,
+            payload
         } as const
-    }
+    },
 }
 
 export type AllUserActions = ReturnType<AllActions<typeof userActions>>

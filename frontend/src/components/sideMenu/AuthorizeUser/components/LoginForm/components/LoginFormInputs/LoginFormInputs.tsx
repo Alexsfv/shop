@@ -38,6 +38,7 @@ const LoginFormInputs: React.FC<LoginFormInputsProps> = (props) => {
                 value={values.email}
                 label="Email"
                 type="text"
+                name="email"
                 variant="outlined"
                 className="auth-user__text-input"
                 error={touched.email && !!errors.email}
@@ -56,6 +57,7 @@ const LoginFormInputs: React.FC<LoginFormInputsProps> = (props) => {
                     type={showPassword ? 'text' : 'password'}
                     value={values.password}
                     error={touched.password && !!errors.password}
+                    name="password"
                     onChange={handleChange}
                     endAdornment={
                         <InputAdornment position="end">
