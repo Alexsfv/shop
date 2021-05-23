@@ -12,7 +12,7 @@ type AuthorizeUserProps = {
 const AuthorizeUser: React.FC<AuthorizeUserProps> = (props) => {
     const { value, index } = props
 
-    const [isLogin, setLogin] = useState<boolean>(false)
+    const [isLogin, setLogin] = useState<boolean>(true)
 
     const handleChangeForm = (isLogin: boolean) => {
         setLogin(isLogin)

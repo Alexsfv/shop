@@ -44,6 +44,7 @@ const RegisterForm: React.FC<LoginFormProps> = (props) => {
                 success: null
             }))
         }, 2500)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [registerForm.success])
 
     return (

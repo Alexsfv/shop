@@ -1,8 +1,15 @@
 import axios from "axios"
-import { RegisterFormValues, LoginFormValues } from "../types/forms"
-import { RegisterResponse, LoginResponse, UserDataResponse } from "../types/response"
+import { RegisterFormValues, LoginFormValues, AccountFormValues } from "../types/forms"
+import { RegisterResponse, LoginResponse, UserDataResponse, UpdateAvatarResponse, UpdataUserInfoResponse } from "../types/response"
 import { getCookie } from "../utils/cookie"
-import { userRegisterUrl, userLoginUrl, initialUserUrl } from "./urls"
+import { userRegisterUrl, userLoginUrl, initialUserUrl, updateAvatarUrl, updateInfoUrl } from "./urls"
+
+const tokenHeader = () => {
+    const token = getCookie('token')
+    return {
+        headers: {'Authorization': `Bearer ${token}`}
+    }
+}
 
 const api = {
     async registerUser(fields: RegisterFormValues) {
@@ -25,12 +32,29 @@ const api = {
     },
     async initialAuth() {
         try {
-            const token = getCookie('token')
-            if (!token) return false
-            const resp = await axios.get(initialUserUrl, {
-                headers: {'Authorization': `Bearer ${token}`}
-            })
+            const resp = await axios.get(initialUserUrl, tokenHeader())
             return resp.data as UserDataResponse
+        } catch(e) {
+            console.log(e)
+            return null
+        }
+    },
+    async updateAvatarUrl(file: File) {
+        try {
+            const formData = new FormData()
+            formData.append('avatar', file)
+            const resp = await axios.post(updateAvatarUrl, formData, tokenHeader())
+            return resp.data as UpdateAvatarResponse
+        } catch(e) {
+            console.log(e)
+            return null
+        }
+    },
+    async updateUserInfo(fields: AccountFormValues) {
+        try {
+            const { _img, imageSrc, ...apiData } = fields
+            const resp = await axios.post(updateInfoUrl, apiData, tokenHeader())
+            return resp.data as UpdataUserInfoResponse
         } catch(e) {
             console.log(e)
             return null

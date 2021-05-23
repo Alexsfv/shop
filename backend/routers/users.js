@@ -3,6 +3,37 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const multer = require('multer')
+
+const ALLOWED_FILES = {
+    'image/png': 'png',
+    'image/jpeg': 'jpeg',
+    'image/jpg': 'jpg'
+}
+
+const avatarField = [{
+    name: 'avatar',
+    maxCount: 1
+}]
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        let errorFile = new Error('Invalid file type')
+        if (ALLOWED_FILES[file.mimetype]) {
+            errorFile = null
+        }
+        cb(errorFile, 'public/uploads/avatars')
+    },
+    filename: function (req, file, cb) {
+        const fileName = file.originalname.split(' ').join('-')
+        const extension = ALLOWED_FILES[file.mimetype]
+        cb(null, `${fileName}-${Date.now()}.${extension}`)
+    }
+})
+
+const optionStorage = multer({
+    storage
+})
 
 router.get('/', async (req, res) => {
     if (!req.isAdmin) return res.status(403).send('Access denied')
@@ -15,6 +46,7 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
+    console.log(111);
     if (!req.isAdmin) return res.status(403).send('Access denied')
 
     const user = await User.findById(req.params.id).select('-passwordHash')
@@ -76,8 +108,48 @@ router.post('/register', async (req, res) => {
     })
 })
 
+router.get('/auth/initial', async (req, res) => {
+    const authToken = req.headers.authorization
+
+    if (!authToken) return res.status(401)
+
+    const token = authToken.split(' ')[1]
+    const payload = jwt.verify(token, process.env.secret)
+    const dateNow = Math.ceil(Date.now()/1000)
+
+    if (dateNow > payload.exp) return res.status(401)
+
+    const user = await User.findById(payload.userId).select()
+    const userWihoutHash = Object.assign({}, user._doc)
+    delete userWihoutHash.passwordHash
+
+    return res.status(200).json(user)
+})
+
+router.post('/account/avatar', optionStorage.fields(avatarField), async (req, res) => {
+    if (!req.files.avatar) return res.status(400).json('"avatar" is reqiured')
+    const imageUrl = `/public/uploads/avatars/${req.files.avatar[0].filename}`
+    await User.findByIdAndUpdate(req.userId, {image: imageUrl})
+    res.status(200).json({path: imageUrl})
+})
+
+router.post('/account/info', async (req, res) => {
+    console.log('BODY', req.body)
+    const user = await User.findByIdAndUpdate(req.userId, {
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone,
+        country: req.body.country,
+        city: req.body.city,
+    }, {new: true})
+    if (!user) res.status(500).text('Error when editing a user')
+    const userWihoutHash = Object.assign({}, user._doc)
+    delete userWihoutHash.passwordHash
+
+    return res.status(200).json({ user })
+})
+
 router.get('/get/count', async (req, res) => {
-    console.log('req.status', req.isAdmin);
     if (!req.isAdmin) return res.status(403).send('Access denied')
 
     const userCount = await User.countDocuments(count => count)

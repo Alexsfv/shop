@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useMemo } from 'react'
 import './ProductsLineSlider.scss'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ProductCard from '../../cards/ProductCard/ProductCard';

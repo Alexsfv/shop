@@ -1,4 +1,5 @@
 export type UserDataResponse = {
+    image: string
     cart: []
     city: string
     country: string
@@ -18,4 +19,12 @@ export type RegisterResponse = {
 export type LoginResponse = {
     user: UserDataResponse,
     token: string
+}
+
+export type UpdateAvatarResponse = {
+    path: string
+}
+
+export type UpdataUserInfoResponse = {
+    user: UserDataResponse
 }

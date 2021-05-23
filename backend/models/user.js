@@ -5,6 +5,10 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    image: {
+        type: String,
+        default: '/public/uploads/avatars/defaultAvatar.jpg'
+    },
     name: {
         type: String,
         required: true

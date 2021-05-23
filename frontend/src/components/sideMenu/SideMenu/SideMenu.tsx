@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import FadeModal from '../../modals/FadeModal/FadeModal'
 import CloseIcon from '@material-ui/icons/Close';
 import './SideMenu.scss'
@@ -9,7 +9,6 @@ import SwipeableViews from 'react-swipeable-views';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { sideMenuActions } from '../../../store/actions/sideMenuActions'
-
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 import Cart from '../Cart/Cart';
@@ -22,7 +21,6 @@ import Orders from '../Orders/Orders';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/reducers/rootReducer';
 import { SideMenuState } from '../../../store/reducers/sideMenuReducer';
-import { UserState } from '../../../store/reducers/userReducer';
 
 type SideMenuProps = {
     isShow: boolean

@@ -1,5 +1,5 @@
 import { AllUserActions } from "../actions/userActions"
-import { USER_LOGOUT, USER_SET_STATUS_LOGIN, USER_SET_STATUS_REGISTER, USER_INITIAL } from "../actionTypes/userActionTypes"
+import { USER_LOGOUT, USER_SET_STATUS_LOGIN, USER_SET_STATUS_REGISTER, USER_INITIAL, USER_UPDATE_AVATAR } from "../actionTypes/userActionTypes"
 
 type FormState = {
     isFetching: boolean
@@ -76,6 +76,15 @@ export const userReducer = (state = userState, action: AllUserActions): UserStat
                     ...state.loginForm,
                     isFetching: action.payload.isFetching,
                     success: action.payload.success,
+                }
+            }
+        }
+        case(USER_UPDATE_AVATAR): {
+            return {
+                ...state,
+                info: {
+                    ...state.info,
+                    image: action.payload
                 }
             }
         }

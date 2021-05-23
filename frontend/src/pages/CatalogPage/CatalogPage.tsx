@@ -287,9 +287,9 @@ const CatalogPage: React.FC<CatalogPageProps> = (props) => {
                     </div>
                     <div className={showFilter ? "filter__body active" : "filter__body"}>
 
-                        {
+                        {/* {
                             new Array(1).fill('').map(() => (
-                                <>
+                                <> */}
                                     <CheckboxGroup
                                         value={filter.color}
                                         name="color"
@@ -325,9 +325,9 @@ const CatalogPage: React.FC<CatalogPageProps> = (props) => {
 
                                         onChange={val => toggleCheckbox('price', val)}
                                     />
-                                </>
+                                {/* </>
                             ))
-                        }
+                        } */}
                     </div>
                 </div>
             </section>

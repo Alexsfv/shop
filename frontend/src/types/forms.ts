@@ -12,4 +12,15 @@ export type RegisterFormValues = {
     confirmPassword: string
 }
 
+export type AccountFormValues = {
+    name: string
+    email: string
+    phone: string
+    imageSrc: string
+    country: string
+    city: string
+
+    _img: File | null
+}
+
 export type FormikSetFieldTouched<Values> = (field: string, touched?: boolean, shouldValidate?: boolean | undefined) => Promise<FormikErrors<Values>> | Promise<void>;

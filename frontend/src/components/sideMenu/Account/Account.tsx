@@ -1,11 +1,16 @@
-import { TextField } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import './Account.scss'
 import TabPanel from '../../ui/TabPanel/TabPanel'
-import PublishIcon from '@material-ui/icons/Publish';
-import SaveIcon from '@material-ui/icons/Save';
-import Button from '@material-ui/core/Button';
-import CancelIcon from '@material-ui/icons/Cancel';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../store/reducers/rootReducer';
+import { UserState } from '../../../store/reducers/userReducer';
+import { useFormik } from 'formik';
+import { AccountFormValues } from '../../../types/forms';
+import { initialAccountForm, validateAccountForm } from '../../forms/AccountForm/formData.ts/accountFormData';
+import AccountFormInputs from '../../forms/AccountForm/AccountFormInputs/AccountFormInputs';
+import { userSagaActions } from '../../../store/saga/userSaga';
+import { userActions } from '../../../store/actions/userActions';
 
 type AccountProps = {
     value: number
@@ -15,158 +20,58 @@ type AccountProps = {
 const Account: React.FC<AccountProps> = (props) => {
     const { value, index } = props
 
-    const [isEdit, setEdit] = useState<boolean>(false)
+    const user = useSelector<RootState>(state => state.user.info) as UserState['info']
 
-    const [newImage, setNewImage] = useState<File | null>(null)
-    const [newImageUrl, setNewImageUrl] = useState<string>('')
+    const dispatch = useDispatch()
 
-    const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files && e.target.files[0]
-        if (file) {
-            const reader = new FileReader()
-            reader.readAsDataURL(file)
-            reader.onloadend = (e) => {
-                const url = e.target?.result
-                if (url) {
-                    setNewImage(file)
-                    setNewImageUrl(url.toString())
-                }
-            }
-            reader.onerror = () => {
-                setNewImage(null)
-                setNewImageUrl('')
-            }
+    const formik = useFormik<AccountFormValues>({
+        initialValues: initialAccountForm,
+        validate: validateAccountForm,
+        onSubmit: (values) => {
+            dispatch(userSagaActions.updateInfo(values))
+            resetChanges()
         }
+    })
+
+    const handleUploadImg = () => {
+        const file = formik.values._img
+        if (file) dispatch(userSagaActions.updateAvatar(file))
     }
 
-    const handleClickUploadImage = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        setNewImageUrl('')
-        setNewImage(null)
+    const resetChanges = () => {
+        formik.setValues({
+            ...formik.values,
+            name: user.name,
+            imageSrc: user.image,
+            email: user.email,
+            phone: user.phone,
+            country: user.country,
+            city: user.city,
+        })
     }
-    const handleClickCancelImage = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        setNewImageUrl('')
-        setNewImage(null)
-    }
+
+    const onExit = () => dispatch(userActions.logout())
+
+    useEffect(() => {
+        resetChanges()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user])
 
     return (
         <div className="account">
             <TabPanel value={value} index={index}>
                 <div className="account__content">
-                    <form className="account__body">
-
-                        <div className="account__top">
-                            <div className="account__img">
-                                <img src={newImageUrl || "/static/img/defaultAvatar.jpg"} alt="avatar" />
-                                <label className="account__new-img-field">
-                                    <PublishIcon className="account__new-img-icon" />
-                                    New photo
-                                    <input
-                                        type="file"
-                                        className="account__img-input"
-                                        onChange={handleChangeImage}
-                                    />
-                                </label>
-                            </div>
-                            {
-                                newImage && newImageUrl &&
-                                <div className="account__new-img-controls">
-                                    <p className="account__new-img-title">Change the photo?</p>
-                                    <button
-                                        className="account__new-img-agree btn btn-primary"
-                                        onClick={handleClickUploadImage}
-                                    >
-                                        <SaveIcon />
-                                    </button>
-                                    <button
-                                        className="account__new-img-cancel btn btn-danger"
-                                        onClick={handleClickCancelImage}
-                                    >
-                                        <CancelIcon />
-                                    </button>
-                                </div>
-                            }
-                        </div>
-
-                        <div className="account__fields">
-                            <TextField
-                                label="Name"
-                                value="Alex"
-                                variant="outlined"
-                                size="small"
-                                className="account__field"
-                                disabled={!isEdit}
-                            />
-                            <TextField
-                                label="Email"
-                                value="safronov.sanya37@gmail.com"
-                                variant="outlined"
-                                size="small"
-                                className="account__field"
-                                disabled={!isEdit}
-                            />
-                            <TextField
-                                label="Phone"
-                                value="+79512720000"
-                                variant="outlined"
-                                size="small"
-                                className="account__field"
-                                disabled={!isEdit}
-                            />
-                            <TextField
-                                label="Country"
-                                value="Russia"
-                                variant="outlined"
-                                size="small"
-                                className="account__field"
-                                disabled={!isEdit}
-                            />
-                            <TextField
-                                label="City"
-                                value="Kurgan"
-                                variant="outlined"
-                                size="small"
-                                className="account__field"
-                                disabled={!isEdit}
-                            />
-                        </div>
-
-                        <div className="account__controls">
-                            {
-                                !isEdit &&
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    className="account__form-btn"
-                                    onClick={() => setEdit(true)}
-                                >
-                                    Edit
-                                </Button>
-                            }
-                            {
-                                isEdit &&
-                                <>
-                                    <Button
-                                        variant="contained"
-                                        color="primary"
-                                        className="account__form-btn"
-                                        onClick={() => setEdit(false)}
-                                    >
-                                        Save
-                                    </Button>
-                                    <Button
-                                        variant="contained"
-                                        color="secondary"
-                                        className="account__form-btn"
-                                        onClick={() => setEdit(false)}
-                                    >
-                                        Cancel
-                                    </Button>
-                                </>
-                            }
-                        </div>
-
+                    <form className="account__body" onSubmit={e => e.preventDefault()}>
+                        <AccountFormInputs
+                            values={formik.values}
+                            errors={formik.errors}
+                            setFieldValue={formik.setFieldValue}
+                            handleChange={formik.handleChange}
+                            onUploadImg={handleUploadImg}
+                            onResetChanges={resetChanges}
+                            onSubmit={formik.submitForm}
+                            onExit={onExit}
+                        />
                     </form>
                 </div>
             </TabPanel>
